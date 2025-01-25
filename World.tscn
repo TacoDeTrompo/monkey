@@ -34,9 +34,6 @@ script = ExtResource("4_3pt6j")
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
 position = Vector2(197, 244)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 328)
-
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_op0bq")
 
@@ -52,7 +49,7 @@ position = Vector2(-538, 310)
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/BrokerFollow"]
-remote_path = NodePath("../../../StealingSprite")
+remote_path = NodePath("../../../BrokerSprite")
 
 [node name="StealingSprite" type="Sprite2D" parent="."]
 position = Vector2(-538, 310)
