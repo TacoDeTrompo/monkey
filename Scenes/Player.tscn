@@ -5,11 +5,16 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/Accelerating.gd" id="3_lsj6u"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Reverse.gd" id="4_m6spf"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Drifting.gd" id="5_dkla2"]
-[ext_resource type="Texture2D" uid="uid://vxsibspk5qoy" path="res://Assets/4c037f9eebcc9e5b66863023999b11ae.jpg" id="6_ugqym"]
+[ext_resource type="Texture2D" uid="uid://yg60y5k81pfe" path="res://Assets/4c037f9eebcc9e5b66863023999b11ae.jpg" id="6_ugqym"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76snn"]
+height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0557063, 0.0732372)
+texture = ExtResource("6_ugqym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_76snn")
@@ -30,7 +35,6 @@ script = ExtResource("4_m6spf")
 [node name="Drifting" type="Node" parent="StateMachine"]
 script = ExtResource("5_dkla2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(589, 319)
-scale = Vector2(0.502717, 0.527805)
-texture = ExtResource("6_ugqym")
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
