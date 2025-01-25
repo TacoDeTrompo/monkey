@@ -1,5 +1,7 @@
-extends "res://Scripts/States/State.gd"
+extends Node
+class_name SubScene
 
+@export var pathFollow2D: PathFollow2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,9 +10,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
-
-func Update():
-	#main process of the game
 	pass

@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=10 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
+[ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
+[ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
+
+[sub_resource type="Curve2D" id="Curve2D_op0bq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -538, 310, 0, 0, 0, 0, 590, 310)
+}
+point_count = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_moqrg"]
+viewport_path = NodePath("StealingSprite/SubViewport")
 
 [node name="World" type="Node2D"]
 
@@ -22,3 +33,43 @@ script = ExtResource("4_3pt6j")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
 position = Vector2(197, 244)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 328)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_op0bq")
+
+[node name="ShopFollow" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-538, 310)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/ShopFollow"]
+remote_path = NodePath("../../../StealingSprite")
+
+[node name="BrokerFollow" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-538, 310)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/BrokerFollow"]
+remote_path = NodePath("../../../StealingSprite")
+
+[node name="StealingSprite" type="Sprite2D" parent="."]
+position = Vector2(-538, 310)
+texture = SubResource("ViewportTexture_moqrg")
+
+[node name="SubViewport" type="SubViewport" parent="StealingSprite"]
+size = Vector2i(950, 512)
+
+[node name="Stealing" parent="StealingSprite/SubViewport" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
+pathFollow2D = NodePath("../../../Path2D/ShopFollow")
+
+[node name="BrokerSprite" type="Sprite2D" parent="."]
+position = Vector2(-538, 310)
+texture = SubResource("ViewportTexture_moqrg")
+
+[node name="SubViewport2" type="SubViewport" parent="BrokerSprite"]
+size = Vector2i(950, 512)
+
+[node name="Broker" parent="BrokerSprite/SubViewport2" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
+pathFollow2D = NodePath("../../../Path2D/BrokerFollow")

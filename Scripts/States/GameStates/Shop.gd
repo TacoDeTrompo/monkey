@@ -9,3 +9,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func Update():
+	#pause processes from the game overlay smaller canvas with events from broker
+	pass
