@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6p3ffb24opg6"]
+[gd_scene load_steps=8 format=3 uid="uid://b6p3ffb24opg6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="1_q1k4d"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerCB2D.gd" id="1_vm47k"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Idle.gd" id="2_wydj6"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Accelerating.gd" id="3_lsj6u"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Reverse.gd" id="4_m6spf"]
@@ -9,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://yg60y5k81pfe" path="res://Assets/4c037f9eebcc9e5b66863023999b11ae.jpg" id="6_ugqym"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76snn"]
-height = 64.0
+radius = 44.0
+height = 228.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_vm47k")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("PlayerNode")]
 script = ExtResource("1_q1k4d")
@@ -31,7 +30,7 @@ script = ExtResource("4_m6spf")
 script = ExtResource("5_dkla2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0326087, 0.0311569)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_ugqym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
