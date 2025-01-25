@@ -3,11 +3,19 @@ extends "res://State_Machine.gd"
 @export var PlayerNode: CharacterBody2D
 @export var PhysicsData: PlayerPhysicsData
 
-var wheel_base = 160 #each wheel is 80 units from the center
-var steering_angle = 15
+var wheel_base = 80 #each wheel is 80 units from the center
+var steering_angle = 25
+var engine_power = 800
+var friction = -0.9
+var drag = -0.001
+var braking = -450
+var max_reverse_speed = 250
+var slip_speed = 400
+var traction_fast = 0.05
+var traction_slow = 0.7
 
-var velocity = Vector2.ZERO
-var steer_direction
+var acceleration = Vector2.ZERO
+var steer_direction = 0
 
 # Aim
 # var cross = load("res://cross.png")
@@ -19,99 +27,53 @@ func _ready() -> void:
 	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 	pass # Replace with function body.
 
-#TODO: actually do it okey
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#var isPressingFwd = 0
-	#var isPressingBack = 0
-	#var directionAxis = 0
-	#
-	#if Input.is_action_pressed("accelerate"):
-		#isPressingFwd = 1
-		#
-	#if Input.is_action_pressed("brake"):
-		#isPressingBack = 1
-		#
-	#if isPressingFwd:
-		#speed += accel * delta
-	#else:
-		#if speed > 0:
-			#speed -= accel * delta
-			#if speed <= 0:
-				#speed = 0
-		#
-	#if isPressingBack:
-		#speed -= accel * 0.75 * delta
-	#else:
-		#if speed < 0:
-			#speed += accel * delta
-		#
-	#
-	#if speed > maxSpeed:
-		#speed = maxSpeed
-	#
-	#if speed < maxNegativeSpeed:
-		#speed = maxNegativeSpeed
-#
-	#if Input.is_action_pressed("right"):
-		##PlayerNode.rotation_degrees += turnDegree * delta
-		#directionAxis += 1
-		#
-	#if Input.is_action_pressed("left"):
-		##PlayerNode.rotation_degrees -= turnDegree * delta
-		#directionAxis -= 1
-	#
-	#var deltaVelocity = (isPressingFwd * speed * delta) - (isPressingBack * brakingPower * delta)
-	#
-	#var motion_vector = Vector2(0,-deltaVelocity).rotated(PlayerNode.rotation)
-	#
-	#PlayerNode.velocity += motion_vector
-	#
-	##print(PlayerNode.velocity.y)
-	##print(motion_vector)
-	#
-	#PlayerNode.move_and_slide()
-	
-	pass
-
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
+	acceleration = Vector2.ZERO
 	get_input()
+	apply_friction()
 	calculate_steering(delta)
+	PlayerNode.velocity += acceleration * delta
+	
 	PlayerNode.move_and_slide()
-	pass
 
 func get_input():
-	var directionAxis = 0
-	
-	if Input.is_action_pressed("right"):
-		#PlayerNode.rotation_degrees += turnDegree * delta
-		directionAxis += 1
-	
-	if Input.is_action_pressed("left"):
-		#PlayerNode.rotation_degrees -= turnDegree * delta
-		directionAxis -= 1
-	
-	steer_direction = directionAxis * deg_to_rad(steering_angle)
-	
-	velocity = Vector2.ZERO
-	if Input.is_action_pressed("accelerate"):
-		velocity = PlayerNode.transform.x * 500
-	
+	var turn = 0
+	if Input.is_action_pressed("right"): 
+		turn +=1
+	if Input.is_action_pressed("left"): 
+		turn -=1
+	steer_direction = turn * deg_to_rad(steering_angle)
+	#velocity = Vector2.ZERO
+	if Input.is_action_pressed("accelerate"): 
+		acceleration = PlayerNode.transform.x * engine_power
+	if Input.is_action_pressed("brake"): 
+		acceleration = PlayerNode.transform.x * braking
 	pass
 
-func calculate_steering(delta: float):
+func calculate_steering(delta:float):
 	var rear_wheel = PlayerNode.position - PlayerNode.transform.x * wheel_base/2.0
 	var front_wheel = PlayerNode.position + PlayerNode.transform.x * wheel_base/2.0
-	
-	rear_wheel += velocity * delta
-	front_wheel += velocity.rotated(steer_direction) * delta
+	rear_wheel += PlayerNode.velocity * delta
+	front_wheel += PlayerNode.velocity.rotated(steer_direction) * delta
 	
 	var new_heading = (front_wheel - rear_wheel).normalized()
-	velocity = new_heading * velocity.length()
+	var traction = traction_slow
+	if PlayerNode.velocity.length() > slip_speed:
+		traction = traction_fast
+	var d = new_heading.dot(PlayerNode.velocity.normalized()) #valor entre -1 y 1
+	if d > 0:
+		PlayerNode.velocity = PlayerNode.velocity.lerp(new_heading * PlayerNode.velocity.length(),traction) 
+	elif d < 0:
+		PlayerNode.velocity = -new_heading * min( PlayerNode.velocity.length(), max_reverse_speed)
+		
 	PlayerNode.rotation = new_heading.angle()
-	
-	PlayerNode.velocity += velocity
-	
+		
 	pass
- 
+
+func apply_friction():
+	if PlayerNode.velocity.length() < 5:
+		PlayerNode.velocity = Vector2.ZERO
+	var friction_force = PlayerNode.velocity * friction
+	var drag_force = PlayerNode.velocity * PlayerNode.velocity.length() * drag
+	acceleration += drag_force + friction_force
+	pass

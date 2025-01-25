@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkxn5yjqcabv"]
+
+[ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
+[ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
+
+[node name="World" type="Node2D"]
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
+initial_state = NodePath("Drive")
+
+[node name="Drive" type="Node" parent="StateMachine"]
+script = ExtResource("2_nd38h")
+
+[node name="Shop" type="Node" parent="StateMachine"]
+script = ExtResource("3_wcp6t")
+
+[node name="Steal" type="Node" parent="StateMachine"]
+script = ExtResource("4_3pt6j")
+
+[node name="Player" parent="." instance=ExtResource("5_wvhio")]
+
+[node name="Camera2D2" type="Camera2D" parent="."]
