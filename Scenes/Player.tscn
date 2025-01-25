@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6p3ffb24opg6"]
+[gd_scene load_steps=9 format=3 uid="uid://b6p3ffb24opg6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="1_q1k4d"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCB2D.gd" id="1_vm47k"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Idle.gd" id="2_wydj6"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Accelerating.gd" id="3_lsj6u"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Reverse.gd" id="4_m6spf"]
@@ -11,13 +12,7 @@
 height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0557063, 0.0732372)
-texture = ExtResource("6_ugqym")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_76snn")
+script = ExtResource("1_vm47k")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("PlayerNode")]
 script = ExtResource("1_q1k4d")
@@ -35,6 +30,9 @@ script = ExtResource("4_m6spf")
 [node name="Drifting" type="Node" parent="StateMachine"]
 script = ExtResource("5_dkla2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0326087, 0.0311569)
+texture = ExtResource("6_ugqym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_76snn")
