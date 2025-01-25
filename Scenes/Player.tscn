@@ -35,6 +35,6 @@ rotation = 1.56936
 scale = Vector2(1.205, 1.205)
 texture = ExtResource("6_ys5e7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PhysicsCollision" type="CollisionShape2D" parent="."]
 rotation = 1.56936
 shape = SubResource("CapsuleShape2D_76snn")
