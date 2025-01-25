@@ -11,10 +11,8 @@
 script = ExtResource("1_7gdyt")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -12.0
-offset_right = 1174.0
-offset_bottom = 671.0
+offset_right = 1024.0
+offset_bottom = 683.0
 texture = ExtResource("2_e62wv")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]

@@ -11,14 +11,12 @@
 script = ExtResource("1_cqcxv")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -12.0
-offset_right = 1174.0
-offset_bottom = 671.0
+offset_right = 1024.0
+offset_bottom = 683.0
 texture = ExtResource("2_dh6em")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
-initial_state = NodePath("Static")
+initial_state = NodePath("SlidingIn")
 
 [node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("4_j3rxv")
