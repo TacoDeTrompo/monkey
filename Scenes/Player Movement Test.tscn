@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c17oick3chwpk"]
+[gd_scene load_steps=8 format=3 uid="uid://c17oick3chwpk"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_pfkap"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_5fvny"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_hoioq"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_0cp7i"]
 [ext_resource type="Texture2D" uid="uid://bxc8w4l38u1p7" path="res://Assets/map_reference.png" id="6_hpcjq"]
+[ext_resource type="PackedScene" uid="uid://xbefcod13w0r" path="res://Scenes/Gun.tscn" id="6_nkck0"]
 
 [node name="World" type="Node2D"]
 
@@ -30,6 +31,8 @@ position_smoothing_speed = 0.5
 rotation_smoothing_speed = 1.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Gun" parent="Player" instance=ExtResource("6_nkck0")]
 
 [node name="Map2D" type="Sprite2D" parent="."]
 z_index = -10
