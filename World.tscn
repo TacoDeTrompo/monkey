@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=12 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
@@ -7,17 +7,62 @@
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -538, 310, 0, 0, 0, 0, 590, 310)
+"points": PackedVector2Array(0, 0, 0, 0, -2500, 0, 0, 0, 0, 0, -25, 0)
 }
 point_count = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_moqrg"]
-viewport_path = NodePath("StealingSprite/SubViewport")
+viewport_path = NodePath("CanvasLayer/StealingSprite/SubViewportSteal")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_augr6"]
+viewport_path = NodePath("CanvasLayer/BrokerSprite/SubViewportBroker")
 
 [node name="World" type="Node2D"]
+position = Vector2(2823, 581)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Path2D" type="Path2D" parent="CanvasLayer"]
+position = Vector2(620, 319)
+curve = SubResource("Curve2D_op0bq")
+
+[node name="ShopFollow" type="PathFollow2D" parent="CanvasLayer/Path2D"]
+position = Vector2(-2500, 0)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="CanvasLayer/Path2D/ShopFollow"]
+remote_path = NodePath("../../../StealingSprite")
+
+[node name="BrokerFollow" type="PathFollow2D" parent="CanvasLayer/Path2D"]
+position = Vector2(-2500, 0)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="CanvasLayer/Path2D/BrokerFollow"]
+remote_path = NodePath("../../../BrokerSprite")
+
+[node name="StealingSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(-1880, 319)
+texture = SubResource("ViewportTexture_moqrg")
+
+[node name="SubViewportSteal" type="SubViewport" parent="CanvasLayer/StealingSprite"]
+size = Vector2i(1000, 500)
+
+[node name="Stealing" parent="CanvasLayer/StealingSprite/SubViewportSteal" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
+pathFollow2D = NodePath("../../../Path2D/ShopFollow")
+
+[node name="BrokerSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(-1880, 319)
+texture = SubResource("ViewportTexture_augr6")
+
+[node name="SubViewportBroker" type="SubViewport" parent="CanvasLayer/BrokerSprite"]
+size = Vector2i(1000, 500)
+
+[node name="Broker" parent="CanvasLayer/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
+pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
 initial_state = NodePath("Drive")
@@ -32,41 +77,14 @@ script = ExtResource("3_wcp6t")
 script = ExtResource("4_3pt6j")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
-position = Vector2(197, 244)
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_op0bq")
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-197, -244)
+zoom = Vector2(0.5, 0.5)
+limit_smoothed = true
+position_smoothing_speed = 0.5
+rotation_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
-[node name="ShopFollow" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-538, 310)
-rotates = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/ShopFollow"]
-remote_path = NodePath("../../../StealingSprite")
-
-[node name="BrokerFollow" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-538, 310)
-rotates = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/BrokerFollow"]
-remote_path = NodePath("../../../BrokerSprite")
-
-[node name="StealingSprite" type="Sprite2D" parent="."]
-position = Vector2(-538, 310)
-texture = SubResource("ViewportTexture_moqrg")
-
-[node name="SubViewport" type="SubViewport" parent="StealingSprite"]
-size = Vector2i(950, 512)
-
-[node name="Stealing" parent="StealingSprite/SubViewport" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
-pathFollow2D = NodePath("../../../Path2D/ShopFollow")
-
-[node name="BrokerSprite" type="Sprite2D" parent="."]
-position = Vector2(-538, 310)
-texture = SubResource("ViewportTexture_moqrg")
-
-[node name="SubViewport2" type="SubViewport" parent="BrokerSprite"]
-size = Vector2i(950, 512)
-
-[node name="Broker" parent="BrokerSprite/SubViewport2" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
-pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
+[node name="Gun" parent="Player" instance=ExtResource("7_sl73w")]

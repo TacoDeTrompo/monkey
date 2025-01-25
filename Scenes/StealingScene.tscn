@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://q1n8b627aawp"]
+[gd_scene load_steps=8 format=3 uid="uid://q1n8b627aawp"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_cqcxv"]
-[ext_resource type="Texture2D" uid="uid://cabbxolennrgf" path="res://Assets/K2_0050.jpg" id="2_dh6em"]
+[ext_resource type="Texture2D" uid="uid://b36qoljg0rhkk" path="res://Assets/store.png" id="2_sv4n4"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_cwji3"]
+[ext_resource type="Texture2D" uid="uid://brmn6ym6gxvwh" path="res://Assets/store_counter.png" id="3_gjy2r"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_j3rxv"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_jn6jl"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4fjqo"]
@@ -11,14 +12,20 @@
 script = ExtResource("1_cqcxv")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -12.0
-offset_right = 1174.0
-offset_bottom = 671.0
-texture = ExtResource("2_dh6em")
+offset_top = -192.0
+offset_right = 1024.0
+offset_bottom = 491.0
+texture = ExtResource("2_sv4n4")
+
+[node name="Counter" type="TextureRect" parent="."]
+offset_left = 1.0
+offset_top = -137.0
+offset_right = 1022.0
+offset_bottom = 508.0
+texture = ExtResource("3_gjy2r")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
-initial_state = NodePath("Static")
+initial_state = NodePath("SlidingIn")
 
 [node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("4_j3rxv")
