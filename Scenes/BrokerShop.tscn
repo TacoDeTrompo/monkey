@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy2qkbeoi5cso"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_7gdyt"]
-[ext_resource type="Texture2D" uid="uid://cvooqxynne3ts" path="res://Assets/K2_0050.jpg" id="2_e62wv"]
+[ext_resource type="Texture2D" uid="uid://cabbxolennrgf" path="res://Assets/K2_0050.jpg" id="2_e62wv"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_50mk5"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_e2h5k"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_0xrjg"]
@@ -22,11 +22,11 @@ initial_state = NodePath("Static")
 
 [node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("4_e2h5k")
-parentSubScene = NodePath("")
+parentSubScene = NodePath("../..")
 
 [node name="Static" type="Node" parent="StateMachine"]
 script = ExtResource("5_0xrjg")
 
 [node name="SlidingOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("6_4kxbb")
-parentSubScene = NodePath("")
+parentSubScene = NodePath("../..")
