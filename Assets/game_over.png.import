@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmk82af3v4sjk"
-path="res://.godot/imported/police_boat.png-a6cffd3ba971c168ce40699fa6b00c36.ctex"
+uid="uid://dtpvgipf60dvm"
+path="res://.godot/imported/game_over.png-9a554b780d048adf89ecae33dc0a4c42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/police_boat.png"
-dest_files=["res://.godot/imported/police_boat.png-a6cffd3ba971c168ce40699fa6b00c36.ctex"]
+source_file="res://Assets/game_over.png"
+dest_files=["res://.godot/imported/game_over.png-9a554b780d048adf89ecae33dc0a4c42.ctex"]
 
 [params]
 
