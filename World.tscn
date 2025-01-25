@@ -16,10 +16,10 @@ _data = {
 point_count = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_moqrg"]
-viewport_path = NodePath("CanvasLayer/StealingSprite/SubViewport")
+viewport_path = NodePath("CanvasLayer/StealingSprite/SubViewportSteal")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_augr6"]
-viewport_path = NodePath("CanvasLayer/BrokerSprite/SubViewport2")
+viewport_path = NodePath("CanvasLayer/BrokerSprite/SubViewportBroker")
 
 [node name="World" type="Node2D"]
 position = Vector2(2823, 581)
@@ -48,20 +48,20 @@ remote_path = NodePath("../../../BrokerSprite")
 position = Vector2(-1880, 319)
 texture = SubResource("ViewportTexture_moqrg")
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/StealingSprite"]
+[node name="SubViewportSteal" type="SubViewport" parent="CanvasLayer/StealingSprite"]
 size = Vector2i(1000, 500)
 
-[node name="Stealing" parent="CanvasLayer/StealingSprite/SubViewport" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
+[node name="Stealing" parent="CanvasLayer/StealingSprite/SubViewportSteal" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
 pathFollow2D = NodePath("../../../Path2D/ShopFollow")
 
 [node name="BrokerSprite" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(-1880, 319)
 texture = SubResource("ViewportTexture_augr6")
 
-[node name="SubViewport2" type="SubViewport" parent="CanvasLayer/BrokerSprite"]
+[node name="SubViewportBroker" type="SubViewport" parent="CanvasLayer/BrokerSprite"]
 size = Vector2i(1000, 500)
 
-[node name="Broker" parent="CanvasLayer/BrokerSprite/SubViewport2" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
+[node name="Broker" parent="CanvasLayer/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
 pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]

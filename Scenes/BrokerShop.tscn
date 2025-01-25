@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy2qkbeoi5cso"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_7gdyt"]
-[ext_resource type="Texture2D" uid="uid://cabbxolennrgf" path="res://Assets/K2_0050.jpg" id="2_e62wv"]
+[ext_resource type="Texture2D" uid="uid://bj87kqpsa0krd" path="res://Assets/banana_broker_background.png" id="2_86f5e"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_50mk5"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_e2h5k"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_0xrjg"]
@@ -11,9 +11,11 @@
 script = ExtResource("1_7gdyt")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_right = 1024.0
-offset_bottom = 683.0
-texture = ExtResource("2_e62wv")
+offset_left = 2.0
+offset_top = -101.0
+offset_right = 1026.0
+offset_bottom = 582.0
+texture = ExtResource("2_86f5e")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
 initial_state = NodePath("Static")
