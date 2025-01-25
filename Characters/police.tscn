@@ -21,7 +21,7 @@ texture = ExtResource("2_lcayf")
 shape = SubResource("RectangleShape2D_abd4w")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_104a4")]
-initial_state = NodePath("Pursue")
+initial_state = NodePath("Patrol")
 
 [node name="Pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("cop")]
 script = ExtResource("4_uh1pa")
