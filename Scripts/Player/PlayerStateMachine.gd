@@ -47,7 +47,7 @@ func get_input():
 	if Input.is_action_pressed("accelerate"): 
 		acceleration = PlayerNode.transform.x * engine_power
 	if Input.is_action_pressed("brake"): 
-		acceleration = PlayerNode.transform.x * braking
+		acceleration = acceleration + (PlayerNode.transform.x * braking)
 	pass
 
 func calculate_steering(delta:float):
