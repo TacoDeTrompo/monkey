@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/Accelerating.gd" id="3_lsj6u"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Reverse.gd" id="4_m6spf"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Drifting.gd" id="5_dkla2"]
-[ext_resource type="Texture2D" uid="uid://yg60y5k81pfe" path="res://Assets/4c037f9eebcc9e5b66863023999b11ae.jpg" id="6_ugqym"]
+[ext_resource type="Texture2D" uid="uid://clabd6d7rlfst" path="res://Assets/banana_mobile.png" id="6_ys5e7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76snn"]
 radius = 44.0
@@ -29,10 +29,11 @@ script = ExtResource("4_m6spf")
 [node name="Drifting" type="Node" parent="StateMachine"]
 script = ExtResource("5_dkla2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Car" type="Sprite2D" parent="."]
+position = Vector2(0, -2.28)
 rotation = 1.56936
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_ugqym")
+scale = Vector2(1.205, 1.205)
+texture = ExtResource("6_ys5e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.56936

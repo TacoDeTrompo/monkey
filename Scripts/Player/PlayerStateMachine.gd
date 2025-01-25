@@ -5,12 +5,12 @@ extends "res://State_Machine.gd"
 
 var wheel_base = 80 #each wheel is 80 units from the center
 var steering_angle = 25
-var engine_power = 800
+var engine_power = 2600
 var friction = -0.9
 var drag = -0.001
-var braking = -450
-var max_reverse_speed = 250
-var slip_speed = 400
+var braking = -1600
+var max_reverse_speed = 500
+var slip_speed = 800
 var traction_fast = 0.05
 var traction_slow = 0.7
 

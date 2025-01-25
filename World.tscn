@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=7 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
+[ext_resource type="Texture2D" uid="uid://bxc8w4l38u1p7" path="res://Assets/map_reference.png" id="6_ieyul"]
 
 [node name="World" type="Node2D"]
 
@@ -23,7 +24,15 @@ script = ExtResource("4_3pt6j")
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
 
 [node name="Camera2D2" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+limit_smoothed = true
 position_smoothing_speed = 0.5
 rotation_smoothing_speed = 1.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Map2D" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(7348, -8092)
+scale = Vector2(220, 220)
+texture = ExtResource("6_ieyul")
