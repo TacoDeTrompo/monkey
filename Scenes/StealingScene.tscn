@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://q1n8b627aawp"]
+
+[ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_cqcxv"]
+[ext_resource type="Texture2D" uid="uid://cvooqxynne3ts" path="res://Assets/K2_0050.jpg" id="2_dh6em"]
+[ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_cwji3"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_j3rxv"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_jn6jl"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4fjqo"]
+
+[node name="Stealing" type="Node2D" node_paths=PackedStringArray("pathFollow2D")]
+script = ExtResource("1_cqcxv")
+pathFollow2D = NodePath("")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -19.0
+offset_top = -12.0
+offset_right = 1174.0
+offset_bottom = 671.0
+texture = ExtResource("2_dh6em")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
+initial_state = NodePath("Static")
+
+[node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
+script = ExtResource("4_j3rxv")
+parentSubScene = NodePath("../..")
+
+[node name="Static" type="Node" parent="StateMachine"]
+script = ExtResource("5_jn6jl")
+
+[node name="SlidingOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
+script = ExtResource("6_4fjqo")
+parentSubScene = NodePath("../..")
