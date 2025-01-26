@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cngadhih6vrpi"]
+
+[ext_resource type="Texture2D" uid="uid://3sys6sa8mkww" path="res://Assets/banana_2.png" id="1_3bsvu"]
+[ext_resource type="Script" path="res://Scripts/Landmarks/broker.gd" id="2_fulwg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gc0aq"]
+
+[node name="Broker" type="Sprite2D"]
+texture = ExtResource("1_3bsvu")
+script = ExtResource("2_fulwg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(9.96615, 9.96615)
+shape = SubResource("CircleShape2D_gc0aq")
+debug_color = Color(0, 0.646688, 0.230849, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

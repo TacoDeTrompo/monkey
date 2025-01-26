@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsqd7dxu0uoof"]
+
+[ext_resource type="Texture2D" uid="uid://6874mhknbvkn" path="res://Assets/coral.png" id="1_b4ph3"]
+[ext_resource type="Script" path="res://Scripts/Landmarks/bubble_spawner.gd" id="2_5pxhl"]
+
+[node name="BubbleSpawner" type="Node2D"]
+script = ExtResource("2_5pxhl")
+
+[node name="BubbleSpawner" type="Sprite2D" parent="."]
+self_modulate = Color(0.767409, 0.889644, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b4ph3")
+
+[node name="SpawnCooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="SpawnCooldown" to="." method="_on_spawn_cooldown_timeout"]
