@@ -10,6 +10,8 @@ var bananas = 0
 var money = 10
 var oxygen = 100
 
+var stealing_count = 0
+
 var current_pitch = 0.5
 var current_steal = 0
 
@@ -78,4 +80,8 @@ func spawnCops():
 		var cop = police.instantiate()
 		cop.position = position
 		get_parent().add_child(cop)
+func spawn_police():
+	stealing_count+=1
+	var police_to_spawn = stealing_count * 2
+	# TODO: spawn logic
 	pass
