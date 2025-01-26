@@ -13,7 +13,6 @@ func _process(delta):
 
 func SpawnBubble():
 	if get_child_count() <= 2:
-		
 		var scene_instance = scene.instantiate()
 		scene_instance.set_name("scene")
 		add_child(scene_instance)
