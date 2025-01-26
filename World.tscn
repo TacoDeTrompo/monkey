@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=37 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
 [ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
 [ext_resource type="PackedScene" uid="uid://mic4jptyhcrs" path="res://Landmarks/shop.tscn" id="27_skuhu"]
+[ext_resource type="PackedScene" uid="uid://cngadhih6vrpi" path="res://Landmarks/broker.tscn" id="28_xicea"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
@@ -318,6 +319,10 @@ parameters/looping = true
 
 [node name="Shop" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
 position = Vector2(883, -938)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("28_xicea")]
+position = Vector2(-262, -988)
 game_state_machine = NodePath("../../StateMachine")
 
 [connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]

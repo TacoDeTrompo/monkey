@@ -2,6 +2,7 @@ extends Sprite2D
 class_name Broker
 var banana = true
 @export var cost = 300
+@export var game_state_machine: StateMachine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,7 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
-		print("Hello there")
+		game_state_machine.on_child_transition(game_state_machine.current_state, "Shop")
 		#Habilitar el ui de compra al jugador
 	pass # Replace with function body.
 
