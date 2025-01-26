@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bix12onixo017"]
+[gd_scene load_steps=9 format=3 uid="uid://bix12onixo017"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_3du1s"]
 [ext_resource type="Texture2D" uid="uid://dtpvgipf60dvm" path="res://Assets/game_over.png" id="1_lqd4w"]
 [ext_resource type="AudioStream" uid="uid://buc7adn33ibsk" path="res://Assets/game over scream.mp3" id="2_4aedq"]
+[ext_resource type="AudioStream" uid="uid://bkaqp5k322g2w" path="res://Assets/Music/Lus son.mp3" id="4_vfu84"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_us5y5"]
 font_size = 64
@@ -98,6 +99,10 @@ text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4aedq")
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vfu84")
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
