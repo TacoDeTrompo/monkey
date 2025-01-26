@@ -1,6 +1,7 @@
 extends Node
 class_name State
 
+signal Transitioned
 signal OnStateEntered(state_name)
 signal OnStateExit(state_name)
 #You need to run super() on Enter and Exit methods when you need to emit the signals
