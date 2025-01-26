@@ -23,6 +23,10 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player")  and canRob:
 		game_state_machine.on_child_transition(game_state_machine.current_state, "Steal")
+		$RobCooldown.start()
+		canRob = false
+		$CollisionShape2D.set_deferred("disabled", true)
+		visible = false
 		#rob()
 		#Dar dinero al jugador o al gamemode/mapa
 	pass # Replace with function body.
@@ -30,6 +34,8 @@ func _on_area_2d_body_entered(body):
 
 func _on_rob_cooldown_timeout():
 	canRob = true
+	$CollisionShape2D.set_deferred("disabled", false)
+	visible = true
 	pass # Replace with function body.
 
 func can_be_robbed():
