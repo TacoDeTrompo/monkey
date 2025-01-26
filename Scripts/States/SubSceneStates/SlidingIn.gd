@@ -1,4 +1,4 @@
-extends "res://Scripts/States/State.gd"
+extends State
 
 @export var parentSubScene: SubScene
 var pathFollow2D: PathFollow2D

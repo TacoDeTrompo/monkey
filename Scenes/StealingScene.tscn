@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://q1n8b627aawp"]
+[gd_scene load_steps=17 format=3 uid="uid://q1n8b627aawp"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_cqcxv"]
-[ext_resource type="Texture2D" uid="uid://b36qoljg0rhkk" path="res://Assets/store.png" id="2_sv4n4"]
+[ext_resource type="Texture2D" uid="uid://c70do6nh48x7l" path="res://Assets/storebg.png" id="2_u7yra"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_cwji3"]
 [ext_resource type="Texture2D" uid="uid://brmn6ym6gxvwh" path="res://Assets/store_counter.png" id="3_gjy2r"]
 [ext_resource type="Texture2D" uid="uid://dcqexihwyiu8s" path="res://Assets/clerk_1.png" id="3_hpabs"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_jn6jl"]
 [ext_resource type="Texture2D" uid="uid://ocrrj6bcjl10" path="res://Assets/clerk_3.png" id="5_sak30"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4fjqo"]
+[ext_resource type="Texture2D" uid="uid://dg3blpoooqcng" path="res://Assets/TextBoxes/messages_stolen.png" id="7_n4ldb"]
+[ext_resource type="AudioStream" uid="uid://bfeyu32ld35l0" path="res://Assets/SFX/angry.mp3" id="11_tmbfm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tut6f"]
 atlas = ExtResource("3_hpabs")
@@ -47,14 +49,14 @@ script = ExtResource("1_cqcxv")
 offset_top = -192.0
 offset_right = 1024.0
 offset_bottom = 491.0
-texture = ExtResource("2_sv4n4")
+texture = ExtResource("2_u7yra")
 
 [node name="ClerkSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(529, 164)
 scale = Vector2(1.53884, 1.57419)
 sprite_frames = SubResource("SpriteFrames_e5kqa")
 autoplay = "default"
-frame_progress = 0.667644
+frame_progress = 0.712693
 
 [node name="Counter" type="TextureRect" parent="."]
 offset_left = 1.0
@@ -63,6 +65,10 @@ offset_right = 1022.0
 offset_bottom = 508.0
 texture = ExtResource("3_gjy2r")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(515, 394)
+texture = ExtResource("7_n4ldb")
+
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
 initial_state = NodePath("Static")
 
@@ -70,9 +76,16 @@ initial_state = NodePath("Static")
 script = ExtResource("4_j3rxv")
 parentSubScene = NodePath("../..")
 
-[node name="Static" type="Node" parent="StateMachine"]
+[node name="Static" type="Node" parent="StateMachine" node_paths=PackedStringArray("sfx_angry", "rootNode")]
 script = ExtResource("5_jn6jl")
+sfx_angry = NodePath("../../AngryNoises")
+rootNode = NodePath("../..")
 
 [node name="SlidingOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("6_4fjqo")
 parentSubScene = NodePath("../..")
+
+[node name="AngryNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_tmbfm")
+
+[connection signal="finished" from="AngryNoises" to="StateMachine/Static" method="_on_angry_noises_finished"]

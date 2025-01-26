@@ -1,4 +1,4 @@
-extends "res://Scripts/States/State.gd"
+extends State
 
 
 @export var parentSubScene: SubScene
@@ -28,6 +28,8 @@ func decelarate(_delta:float):
 func Update():
 	if progress <= 0.0:
 		get_parent().on_child_transition(self, "Static")
+		var currentState: State = parentSubScene.mainGameStateMachine.current_state
+		parentSubScene.mainGameStateMachine.on_child_transition(currentState, "Drive")
 
 
 func Physics_Update(_delta:float):

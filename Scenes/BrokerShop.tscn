@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cy2qkbeoi5cso"]
+[gd_scene load_steps=23 format=3 uid="uid://cy2qkbeoi5cso"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_7gdyt"]
 [ext_resource type="Texture2D" uid="uid://bj87kqpsa0krd" path="res://Assets/banana_broker_background.png" id="2_86f5e"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dpimnhvqrufl" path="res://Assets/banana.png" id="5_2a6sb"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4kxbb"]
 [ext_resource type="Texture2D" uid="uid://cs0800kfnae1d" path="res://Assets/banana_2.png" id="6_23sun"]
+[ext_resource type="AudioStream" uid="uid://bxtiwsk84o31j" path="res://Assets/SFX/celebration.mp3" id="11_g5dff"]
+[ext_resource type="Texture2D" uid="uid://bmeeggjprn0ra" path="res://Assets/TextBoxes/messages_not_enough.png" id="12_5p62r"]
+[ext_resource type="Texture2D" uid="uid://ci0wwxpjop47h" path="res://Assets/TextBoxes/buy.png" id="13_2f6gh"]
+[ext_resource type="Texture2D" uid="uid://benuxrqsshiir" path="res://Assets/TextBoxes/message_empty.png" id="14_27i6p"]
+[ext_resource type="FontFile" uid="uid://b6sslsiw31vuy" path="res://Assets/Fonts/MoneyMoney-Regular.ttf" id="15_mlpsr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8gd2s"]
 atlas = ExtResource("3_u54o0")
@@ -60,6 +65,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Theme" id="Theme_2vv7i"]
+default_font = ExtResource("15_mlpsr")
+default_font_size = 70
+
 [node name="Broker" type="Node2D"]
 script = ExtResource("1_7gdyt")
 
@@ -71,17 +80,25 @@ offset_bottom = 582.0
 texture = ExtResource("2_86f5e")
 
 [node name="BrokerSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(730, 258)
+position = Vector2(826, 254)
 scale = Vector2(1.90417, 1.87407)
 sprite_frames = SubResource("SpriteFrames_hqwyv")
-animation = &"bought"
+animation = &"selling"
 
 [node name="Banana" type="AnimatedSprite2D" parent="."]
-position = Vector2(474, 118)
+position = Vector2(570, 114)
 scale = Vector2(0.891829, 0.91471)
 sprite_frames = SubResource("SpriteFrames_mae0s")
 autoplay = "default"
-frame_progress = 0.0368334
+frame_progress = 0.910636
+
+[node name="Banana2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(752, 309)
+scale = Vector2(1.44591, 1.56694)
+sprite_frames = SubResource("SpriteFrames_mae0s")
+autoplay = "default"
+frame_progress = 0.668629
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
 initial_state = NodePath("Static")
@@ -90,9 +107,44 @@ initial_state = NodePath("Static")
 script = ExtResource("4_e2h5k")
 parentSubScene = NodePath("../..")
 
-[node name="Static" type="Node" parent="StateMachine"]
+[node name="Static" type="Node" parent="StateMachine" node_paths=PackedStringArray("sfx_success", "brokerSprite", "rootNode")]
 script = ExtResource("5_0xrjg")
+sfx_success = NodePath("../../SuccessNoises")
+brokerSprite = NodePath("../../BrokerSprite")
+rootNode = NodePath("../..")
 
 [node name="SlidingOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("6_4kxbb")
 parentSubScene = NodePath("../..")
+
+[node name="SuccessNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_g5dff")
+
+[node name="NotEnough" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(439, 441)
+texture = ExtResource("12_5p62r")
+
+[node name="Buy" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(346, 467)
+texture = ExtResource("13_2f6gh")
+
+[node name="Cost" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Cost"]
+position = Vector2(262, 164)
+texture = ExtResource("14_27i6p")
+
+[node name="Label" type="Label" parent="Cost"]
+offset_left = 80.0
+offset_top = 130.0
+offset_right = 437.0
+offset_bottom = 201.0
+theme = SubResource("Theme_2vv7i")
+theme_override_colors/font_color = Color(0, 0.592157, 0, 1)
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="finished" from="SuccessNoises" to="StateMachine/Static" method="_on_success_noises_finished"]
