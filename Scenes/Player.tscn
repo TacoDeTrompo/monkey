@@ -14,10 +14,11 @@
 radius = 44.0
 height = 228.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StartAudioPlayer", "LoopAudioPlayer") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("start_audio_player", "loop_audio_player", "player_state_machine") groups=["Player"]]
 script = ExtResource("1_tg02p")
-StartAudioPlayer = NodePath("StartAudioPlayer")
-LoopAudioPlayer = NodePath("LoopAudioPlayer")
+start_audio_player = NodePath("StartAudioPlayer")
+loop_audio_player = NodePath("LoopAudioPlayer")
+player_state_machine = NodePath("StateMachine")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("PlayerNode")]
 script = ExtResource("1_q1k4d")
@@ -47,8 +48,11 @@ shape = SubResource("CapsuleShape2D_76snn")
 
 [node name="StartAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_8isat")
+volume_db = -5.0
 
 [node name="LoopAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1, 0)
 stream = ExtResource("9_j8y0f")
-pitch_scale = 0.64
+volume_db = -5.0
+
+[connection signal="finished" from="StartAudioPlayer" to="." method="_on_start_audio_player_finished"]

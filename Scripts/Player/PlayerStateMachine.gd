@@ -1,6 +1,7 @@
 extends "res://State_Machine.gd"
+class_name PlayerStateMachine
 
-@export var PlayerNode: CharacterBody2D
+@export var PlayerNode: PlayerBody2D
 @export var PhysicsData: PlayerPhysicsData
 
 var wheel_base = 80 #each wheel is 80 units from the center
@@ -22,14 +23,16 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	acceleration = Vector2.ZERO
-	get_input()
+	get_input(delta)
 	apply_friction()
 	calculate_steering(delta)
 	PlayerNode.velocity += acceleration * delta
 	
 	PlayerNode.move_and_slide()
 
-func get_input():
+func get_input(delta):
+	var usedGas = false
+	
 	var turn = 0
 	if Input.is_action_pressed("right"): 
 		turn +=1
@@ -37,10 +40,14 @@ func get_input():
 		turn -=1
 	steer_direction = turn * deg_to_rad(steering_angle)
 	#velocity = Vector2.ZERO
-	if Input.is_action_pressed("accelerate"): 
+	if Input.is_action_pressed("accelerate") && PlayerNode.money > 0:
+		usedGas = true
 		acceleration = PlayerNode.transform.x * engine_power
-	if Input.is_action_pressed("brake"): 
+	if Input.is_action_pressed("brake") && PlayerNode.money > 0:
+		usedGas = true
 		acceleration = acceleration + (PlayerNode.transform.x * braking)
+	
+	if usedGas: PlayerNode.money -= delta # TODO: is this the proper place to do it?, if accelerating remove money
 	pass
 
 func calculate_steering(delta:float):
@@ -69,8 +76,4 @@ func apply_friction():
 	var friction_force = PlayerNode.velocity * friction
 	var drag_force = PlayerNode.velocity * PlayerNode.velocity.length() * drag
 	acceleration += drag_force + friction_force
-	pass
-
-func calculate_audio_pitch():
-	# TODO: audio stuff here?
 	pass
