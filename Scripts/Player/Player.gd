@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		pass
 	
 	if oxygen <= 0:
-		# In water, chimps will drown
+		get_tree().change_scene_to_file("res://game_over.tscn")
 		oxygen = 0
 		pass
 		
