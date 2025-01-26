@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=24 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Texture2D" uid="uid://dcgfoxrbam370" path="res://Assets/bubble_small.png" id="2_gboec"]
@@ -13,8 +13,10 @@
 [ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 [ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
 [ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
+[ext_resource type="AudioStream" uid="uid://b2ofv1wdc4whg" path="res://Assets/Music/Persecusion/IntroPerse.mp3" id="14_71ip3"]
 [ext_resource type="AudioStream" uid="uid://dgdmcwcr3dkt0" path="res://Assets/Music/Persecusion/Guitarra.mp3" id="14_ry810"]
 [ext_resource type="AudioStream" uid="uid://dfgn5upicy6xu" path="res://Assets/Music/Persecusion/percusion.mp3" id="15_3sjfv"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="15_rp5e6"]
 [ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
 [ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
 
@@ -162,11 +164,10 @@ script = ExtResource("3_wcp6t")
 script = ExtResource("4_3pt6j")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
-script = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-197, -244)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.3, 0.3)
 limit_smoothed = true
 position_smoothing_speed = 0.5
 rotation_smoothing_speed = 1.0
@@ -179,14 +180,18 @@ drag_vertical_enabled = true
 
 [node name="ShopMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("12_vtq40")
-autoplay = true
 parameters/looping = true
 
 [node name="StealMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("13_dm146")
 parameters/looping = true
 
+[node name="PersecusionIntro" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("14_71ip3")
+autoplay = true
+
 [node name="PersecusionLayers" type="Node" parent="Music"]
+script = ExtResource("15_rp5e6")
 
 [node name="Guitar" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
 stream = ExtResource("14_ry810")
@@ -194,12 +199,17 @@ parameters/looping = true
 
 [node name="Percussion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
 stream = ExtResource("15_3sjfv")
+volume_db = -80.0
 parameters/looping = true
 
 [node name="Accordion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
 stream = ExtResource("16_ylmjm")
+volume_db = -80.0
 parameters/looping = true
 
 [node name="Violin" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
 stream = ExtResource("17_ovewj")
+volume_db = -80.0
 parameters/looping = true
+
+[connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]
