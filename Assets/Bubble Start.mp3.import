@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddkmhvng8lulv"
+path="res://.godot/imported/Bubble Start.mp3-8e3ecd1aa357b47e6e1291ad77833af3.mp3str"
+
+[deps]
+
+source_file="res://Assets/Bubble Start.mp3"
+dest_files=["res://.godot/imported/Bubble Start.mp3-8e3ecd1aa357b47e6e1291ad77833af3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

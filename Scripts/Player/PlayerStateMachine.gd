@@ -17,14 +17,7 @@ var traction_slow = 0.7
 var acceleration = Vector2.ZERO
 var steer_direction = 0
 
-# Aim
-# var cross = load("res://cross.png")
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Changes a specific shape of the cursor (here, the cross shape).
-	# Input.set_custom_mouse_cursor(cross, Input.CURSOR_CROSS)
-	Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -76,4 +69,8 @@ func apply_friction():
 	var friction_force = PlayerNode.velocity * friction
 	var drag_force = PlayerNode.velocity * PlayerNode.velocity.length() * drag
 	acceleration += drag_force + friction_force
+	pass
+
+func calculate_audio_pitch():
+	# TODO: audio stuff here?
 	pass

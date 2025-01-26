@@ -1,17 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6p3ffb24opg6"]
+[gd_scene load_steps=11 format=3 uid="uid://b6p3ffb24opg6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="1_q1k4d"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_tg02p"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Idle.gd" id="2_wydj6"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Accelerating.gd" id="3_lsj6u"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Reverse.gd" id="4_m6spf"]
 [ext_resource type="Script" path="res://Scripts/Player/States/Drifting.gd" id="5_dkla2"]
 [ext_resource type="Texture2D" uid="uid://clabd6d7rlfst" path="res://Assets/banana_mobile.png" id="6_ys5e7"]
+[ext_resource type="AudioStream" uid="uid://ddkmhvng8lulv" path="res://Assets/Bubble Start.mp3" id="8_8isat"]
+[ext_resource type="AudioStream" uid="uid://b2ktitxwk2hpa" path="res://Assets/Bubble Loop.mp3" id="9_j8y0f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76snn"]
 radius = 44.0
 height = 228.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StartAudioPlayer", "LoopAudioPlayer")]
+script = ExtResource("1_tg02p")
+StartAudioPlayer = NodePath("StartAudioPlayer")
+LoopAudioPlayer = NodePath("LoopAudioPlayer")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("PlayerNode")]
 script = ExtResource("1_q1k4d")
@@ -38,3 +44,11 @@ texture = ExtResource("6_ys5e7")
 [node name="PhysicsCollision" type="CollisionShape2D" parent="."]
 rotation = 1.56936
 shape = SubResource("CapsuleShape2D_76snn")
+
+[node name="StartAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_8isat")
+
+[node name="LoopAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1, 0)
+stream = ExtResource("9_j8y0f")
+pitch_scale = 0.64
