@@ -9,8 +9,9 @@ var bananas = 0
 var money = 10
 var oxygen = 100
 
+var stealing_count = 0
+
 var current_pitch = 0.5
-var current_gear = 1
 
 # Aim
 # var cross = load("res://cross.png")
@@ -66,4 +67,10 @@ func calculate_audio_pitch(delta):
 	
 	start_audio_player.pitch_scale = current_pitch
 	loop_audio_player.pitch_scale = current_pitch
+	pass
+
+func spawn_police():
+	stealing_count+=1
+	var police_to_spawn = stealing_count * 2
+	# TODO: spawn logic
 	pass
