@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://qanb1e12imqs"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/police.gd" id="1_8qcbk"]
-[ext_resource type="Texture2D" uid="uid://dh272rwdejwf" path="res://icon.svg" id="2_lcayf"]
+[ext_resource type="Texture2D" uid="uid://bmk82af3v4sjk" path="res://Assets/police_boat.png" id="2_jx482"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_104a4"]
 [ext_resource type="Script" path="res://Scripts/States/CopStatePursue.gd" id="4_uh1pa"]
 [ext_resource type="Script" path="res://Scripts/States/CopStatePatrol.gd" id="5_fujh0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abd4w"]
-size = Vector2(130, 130)
+size = Vector2(182, 54)
 
 [node name="Police" type="CharacterBody2D"]
 motion_mode = 1
@@ -15,13 +15,15 @@ floor_stop_on_slope = false
 script = ExtResource("1_8qcbk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_lcayf")
+rotation = 1.5708
+texture = ExtResource("2_jx482")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_abd4w")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_104a4")]
-initial_state = NodePath("Patrol")
+initial_state = NodePath("Pursue")
 
 [node name="Pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("cop")]
 script = ExtResource("4_uh1pa")

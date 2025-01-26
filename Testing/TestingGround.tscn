@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfn6115afbfby"]
+
+[ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="1_7ijjk"]
+[ext_resource type="PackedScene" uid="uid://qanb1e12imqs" path="res://Characters/police.tscn" id="2_kl4er"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7ijjk")]
+position = Vector2(202, 176)
+
+[node name="Police" parent="." instance=ExtResource("2_kl4er")]
+position = Vector2(-911, -421)
+
+[node name="Pursue" parent="Police/StateMachine" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../Player")
+
+[node name="Patrol" parent="Police/StateMachine" index="1" node_paths=PackedStringArray("cop", "player")]
+cop = NodePath("../..")
+player = NodePath("../../../Player")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[editable path="Police"]
