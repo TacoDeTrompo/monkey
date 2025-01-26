@@ -19,7 +19,7 @@ var bought: bool = false
 func _ready() -> void:
 	name_of_state = "Static"
 	var rng = RandomNumberGenerator.new()
-	cost = rng.randi_range(1000, 50000)
+	cost = rng.randi_range(1000, 20000)
 	#cost = 2
 	
 

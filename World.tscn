@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=39 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
@@ -28,6 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
 [ext_resource type="PackedScene" uid="uid://mic4jptyhcrs" path="res://Landmarks/shop.tscn" id="27_skuhu"]
 [ext_resource type="PackedScene" uid="uid://cngadhih6vrpi" path="res://Landmarks/broker.tscn" id="28_xicea"]
+[ext_resource type="PackedScene" uid="uid://bsqd7dxu0uoof" path="res://Landmarks/bubble_spawner.tscn" id="29_jww77"]
+[ext_resource type="PackedScene" uid="uid://dvbukttbmoeyc" path="res://Landmarks/coral.tscn" id="30_fmtw3"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
@@ -322,9 +324,108 @@ parameters/looping = true
 position = Vector2(883, -938)
 game_state_machine = NodePath("../../StateMachine")
 
+[node name="Shop2" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(9115, -3090)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop3" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(8557, -14387)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop4" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(21676, -8884)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop5" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(-4695, -10372)
+game_state_machine = NodePath("../../StateMachine")
+
 [node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
 position = Vector2(-262, -988)
 game_state_machine = NodePath("../../StateMachine")
 subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker2" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(6386, -1874)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker3" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(7237, -7985)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker4" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(14748, -35)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker5" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(16504, -12182)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="BubbleSpawner" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(2367, -99)
+
+[node name="BubbleSpawner2" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(3891, -10514)
+
+[node name="BubbleSpawner3" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(-4373, -5353)
+
+[node name="BubbleSpawner4" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(20880, -6098)
+
+[node name="Coral3" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2601, -11690)
+
+[node name="Coral4" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(22216, -7452)
+
+[node name="Coral5" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(19757, -6189)
+
+[node name="Coral6" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(22114, -6031)
+
+[node name="Coral7" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(20973, -5047)
+
+[node name="Coral8" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(20987, -7214)
+
+[node name="Coral9" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2269, -1444)
+
+[node name="Coral10" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(3980, -756)
+
+[node name="Coral13" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2173, -10361)
+
+[node name="Coral14" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(1052, 559)
+
+[node name="Coral15" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2811, 552)
+
+[node name="Coral16" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-3963, -4665)
+
+[node name="Coral17" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-3915, -6054)
+
+[node name="Coral18" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-5732, -5311)
+
+[node name="Coral19" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(4504, -11168)
+
+[node name="Coral20" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(4998, -9818)
+
+[node name="Coral21" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(3325, -9132)
 
 [connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]

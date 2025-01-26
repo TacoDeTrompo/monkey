@@ -12,6 +12,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_b4ph3")
 
 [node name="SpawnCooldown" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 30.0
 
 [connection signal="timeout" from="SpawnCooldown" to="." method="_on_spawn_cooldown_timeout"]

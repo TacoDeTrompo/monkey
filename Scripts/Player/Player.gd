@@ -7,7 +7,7 @@ class_name PlayerBody2D
 @onready var police = preload("res://Characters/police.tscn")
 
 var bananas = 0
-var money = 50
+var money = 100
 var oxygen = 100
 
 var current_pitch = 0.5
@@ -43,7 +43,10 @@ func _process(delta: float) -> void:
 		pass
 		
 	# is this the correct place to remove oxygen?
-	oxygen -= delta
+	if(money == 0):
+		oxygen -= delta * 20
+	else:
+		oxygen -= delta
 	
 	pass
 
@@ -97,3 +100,6 @@ func spawnCops():
 func take_money_damage():
 	print("My dinero!")
 	money -= 100
+
+func regain_air():
+	oxygen = min(oxygen+20, 100)
