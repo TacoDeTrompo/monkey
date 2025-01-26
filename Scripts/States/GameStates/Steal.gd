@@ -1,4 +1,12 @@
-extends "res://Scripts/States/State.gd"
+extends State
+
+
+@export var music_manager: MusicManager
+
+
+func Enter():
+	super()
+	music_manager.StartAudioStreamPlay("StealMusic")
 
 
 # Called when the node enters the scene tree for the first time.

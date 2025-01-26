@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=25 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Texture2D" uid="uid://dcgfoxrbam370" path="res://Assets/bubble_small.png" id="2_gboec"]
@@ -11,12 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
 [ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="12_1npv4"]
 [ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
 [ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
 [ext_resource type="AudioStream" uid="uid://b2ofv1wdc4whg" path="res://Assets/Music/Persecusion/IntroPerse.mp3" id="14_71ip3"]
 [ext_resource type="AudioStream" uid="uid://dgdmcwcr3dkt0" path="res://Assets/Music/Persecusion/Guitarra.mp3" id="14_ry810"]
 [ext_resource type="AudioStream" uid="uid://dfgn5upicy6xu" path="res://Assets/Music/Persecusion/percusion.mp3" id="15_3sjfv"]
-[ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="15_rp5e6"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicLayerManager.gd" id="15_rp5e6"]
 [ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
 [ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
 
@@ -154,14 +155,17 @@ pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
 initial_state = NodePath("Drive")
 
-[node name="Drive" type="Node" parent="StateMachine"]
+[node name="Drive" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
 script = ExtResource("2_nd38h")
+music_manager = NodePath("../../Music")
 
-[node name="Shop" type="Node" parent="StateMachine"]
+[node name="Shop" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
 script = ExtResource("3_wcp6t")
+music_manager = NodePath("../../Music")
 
-[node name="Steal" type="Node" parent="StateMachine"]
+[node name="Steal" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
 script = ExtResource("4_3pt6j")
+music_manager = NodePath("../../Music")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
 
@@ -176,7 +180,9 @@ drag_vertical_enabled = true
 
 [node name="Gun" parent="Player" instance=ExtResource("7_sl73w")]
 
-[node name="Music" type="Node" parent="."]
+[node name="Music" type="Node" parent="." node_paths=PackedStringArray("layeredSong")]
+script = ExtResource("12_1npv4")
+layeredSong = NodePath("PersecusionLayers")
 
 [node name="ShopMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("12_vtq40")
