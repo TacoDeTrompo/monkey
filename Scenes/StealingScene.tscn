@@ -25,7 +25,7 @@ offset_bottom = 508.0
 texture = ExtResource("3_gjy2r")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
-initial_state = NodePath("SlidingIn")
+initial_state = NodePath("Static")
 
 [node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("4_j3rxv")
