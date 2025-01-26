@@ -1,21 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy2qkbeoi5cso"]
+[gd_scene load_steps=13 format=3 uid="uid://cy2qkbeoi5cso"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_7gdyt"]
-[ext_resource type="Texture2D" uid="uid://cabbxolennrgf" path="res://Assets/K2_0050.jpg" id="2_e62wv"]
+[ext_resource type="Texture2D" uid="uid://bj87kqpsa0krd" path="res://Assets/banana_broker_background.png" id="2_86f5e"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_50mk5"]
+[ext_resource type="Texture2D" uid="uid://dgnyh0va1l2p6" path="res://Assets/IMG_20250125_160759999.png" id="3_o4hoa"]
+[ext_resource type="Texture2D" uid="uid://86ecrbi48j6c" path="res://Assets/IMG_20250125_160649528.png" id="4_86lab"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_e2h5k"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_0xrjg"]
+[ext_resource type="Texture2D" uid="uid://dpimnhvqrufl" path="res://Assets/banana.png" id="5_2a6sb"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4kxbb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4afj"]
+atlas = ExtResource("3_o4hoa")
+region = Rect2(0, 0, 4080, 3072)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h2he"]
+atlas = ExtResource("4_86lab")
+region = Rect2(0, 0, 4080, 3072)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqwyv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4afj")
+}],
+"loop": true,
+"name": &"bought",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h2he")
+}],
+"loop": true,
+"name": &"selling",
+"speed": 5.0
+}]
 
 [node name="Broker" type="Node2D"]
 script = ExtResource("1_7gdyt")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -12.0
-offset_right = 1174.0
-offset_bottom = 671.0
-texture = ExtResource("2_e62wv")
+offset_left = 2.0
+offset_top = -101.0
+offset_right = 1026.0
+offset_bottom = 582.0
+texture = ExtResource("2_86f5e")
+
+[node name="BrokerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(694, 267.5)
+scale = Vector2(0.16152, 0.16569)
+sprite_frames = SubResource("SpriteFrames_hqwyv")
+animation = &"selling"
+
+[node name="Banana" type="Sprite2D" parent="."]
+position = Vector2(474, 124)
+texture = ExtResource("5_2a6sb")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
 initial_state = NodePath("Static")

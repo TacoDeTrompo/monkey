@@ -1,21 +1,68 @@
-[gd_scene load_steps=7 format=3 uid="uid://q1n8b627aawp"]
+[gd_scene load_steps=15 format=3 uid="uid://q1n8b627aawp"]
 
 [ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_cqcxv"]
-[ext_resource type="Texture2D" uid="uid://cabbxolennrgf" path="res://Assets/K2_0050.jpg" id="2_dh6em"]
+[ext_resource type="Texture2D" uid="uid://b36qoljg0rhkk" path="res://Assets/store.png" id="2_sv4n4"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_cwji3"]
+[ext_resource type="Texture2D" uid="uid://brmn6ym6gxvwh" path="res://Assets/store_counter.png" id="3_gjy2r"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_j3rxv"]
+[ext_resource type="Texture2D" uid="uid://cylxg6ov825b2" path="res://Assets/IMG_20250125_160449867_BURST006.png" id="4_w8hr3"]
+[ext_resource type="Texture2D" uid="uid://droh4ys4kcmg2" path="res://Assets/IMG_20250125_160449867_BURST007.png" id="5_8mrwt"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_jn6jl"]
+[ext_resource type="Texture2D" uid="uid://bvgkuuwaosy1t" path="res://Assets/IMG_20250125_160449867_BURST017.png" id="6_2wv3o"]
 [ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4fjqo"]
 
-[node name="Stealing" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bitho"]
+atlas = ExtResource("4_w8hr3")
+region = Rect2(0, 0, 4080, 3072)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21v03"]
+atlas = ExtResource("5_8mrwt")
+region = Rect2(0, 0, 4080, 3072)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lrtg"]
+atlas = ExtResource("6_2wv3o")
+region = Rect2(0, 0, 4080, 3072)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e5kqa"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_bitho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21v03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lrtg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Stealing" type="Node2D" node_paths=PackedStringArray("pathFollow2D")]
 script = ExtResource("1_cqcxv")
+pathFollow2D = NodePath("")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -12.0
-offset_right = 1174.0
-offset_bottom = 671.0
-texture = ExtResource("2_dh6em")
+offset_top = -192.0
+offset_right = 1024.0
+offset_bottom = 491.0
+texture = ExtResource("2_sv4n4")
+
+[node name="ClerkSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(503, 185)
+scale = Vector2(0.153523, 0.152466)
+sprite_frames = SubResource("SpriteFrames_e5kqa")
+autoplay = "default"
+frame_progress = 0.194947
+
+[node name="Counter" type="TextureRect" parent="."]
+offset_left = 1.0
+offset_top = -137.0
+offset_right = 1022.0
+offset_bottom = 508.0
+texture = ExtResource("3_gjy2r")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cwji3")]
 initial_state = NodePath("Static")
