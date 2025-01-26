@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
-[ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
-[ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" uid="uid://xbefcod13w0r" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
+[ext_resource type="PackedScene" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
+[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
@@ -77,6 +77,7 @@ script = ExtResource("3_wcp6t")
 script = ExtResource("4_3pt6j")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-197, -244)

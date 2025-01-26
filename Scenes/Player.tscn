@@ -14,7 +14,7 @@
 radius = 44.0
 height = 228.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StartAudioPlayer", "LoopAudioPlayer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StartAudioPlayer", "LoopAudioPlayer") groups=["Player"]]
 script = ExtResource("1_tg02p")
 StartAudioPlayer = NodePath("StartAudioPlayer")
 LoopAudioPlayer = NodePath("LoopAudioPlayer")

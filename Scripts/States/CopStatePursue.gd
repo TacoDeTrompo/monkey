@@ -8,7 +8,7 @@ func Enter():
 func _process(delta):
 	DirectionDif = cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin))
 	ChasePlayer()
-	print(cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin)))
+	#print(cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin)))
 
 func Physics_Update(delta):
 	#cop.velocity.x = move_speed
@@ -44,7 +44,7 @@ func AlongsideTarget():
 func AlignTarget(offset= 0):
 	var OffsetDirection
 	if offset == 0:
-		print(0)
+		#print(0)
 		OffsetDirection = DirectionDif #de donde saco esto?
 	else:
 		var TargetDirection = cop.global_transform.origin.direction_to(player.global_transform.origin)
@@ -59,7 +59,7 @@ func ChasePlayer():
 		#Transitioned.emit(self, "Patrol") #Crear estado para realiniearse?
 		pass
 	else:
-		print("run")
+		#print("run")
 		cop.accelerate(1)
 	
 
