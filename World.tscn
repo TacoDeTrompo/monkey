@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=25 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
+[ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
 [ext_resource type="Texture2D" uid="uid://dcgfoxrbam370" path="res://Assets/bubble_small.png" id="2_gboec"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
 [ext_resource type="Texture2D" uid="uid://cs0800kfnae1d" path="res://Assets/banana_2.png" id="3_k7bf4"]
@@ -10,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 [ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
 [ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
 [ext_resource type="AudioStream" uid="uid://b2ofv1wdc4whg" path="res://Assets/Music/Persecusion/IntroPerse.mp3" id="14_71ip3"]
@@ -39,7 +40,12 @@ viewport_path = NodePath("UI/BrokerSprite/SubViewportBroker")
 [node name="World" type="Node2D"]
 position = Vector2(2823, 581)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("bananas", "bubbles", "money_label", "player")]
+script = ExtResource("1_kkuqg")
+bananas = [NodePath("InGame Interface/BananaCounter/Banana"), NodePath("InGame Interface/BananaCounter/Banana2"), NodePath("InGame Interface/BananaCounter/Banana3"), NodePath("InGame Interface/BananaCounter/Banana4"), NodePath("InGame Interface/BananaCounter/Banana5")]
+bubbles = [NodePath("InGame Interface/AirCounter/Bubble"), NodePath("InGame Interface/AirCounter/Bubble2"), NodePath("InGame Interface/AirCounter/Bubble3"), NodePath("InGame Interface/AirCounter/Bubble4"), NodePath("InGame Interface/AirCounter/Bubble5")]
+money_label = NodePath("InGame Interface/Label")
+player = NodePath("../Player")
 
 [node name="Path2D" type="Path2D" parent="UI"]
 position = Vector2(620, 319)
@@ -74,22 +80,27 @@ offset_bottom = 631.0
 columns = 5
 
 [node name="Banana" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_k7bf4")
 
 [node name="Banana2" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_k7bf4")
 
 [node name="Banana3" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_k7bf4")
 
 [node name="Banana4" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_k7bf4")
 
 [node name="Banana5" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_k7bf4")
 
@@ -102,22 +113,27 @@ offset_bottom = 85.0
 columns = 5
 
 [node name="Bubble" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_gboec")
 
 [node name="Bubble2" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_gboec")
 
 [node name="Bubble3" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_gboec")
 
 [node name="Bubble4" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_gboec")
 
 [node name="Bubble5" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_gboec")
 
