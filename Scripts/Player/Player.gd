@@ -7,7 +7,7 @@ class_name PlayerBody2D
 @onready var police = preload("res://Characters/police.tscn")
 
 var bananas = 0
-var money = 10
+var money = 50
 var oxygen = 100
 
 var current_pitch = 0.5
@@ -93,4 +93,7 @@ func spawnCops():
 	
 	cop.position = copSpawn
 	get_parent().add_child(cop)
-#
+
+func take_money_damage():
+	print("My dinero!")
+	money -= 100

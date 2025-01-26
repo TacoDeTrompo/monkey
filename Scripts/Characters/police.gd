@@ -159,3 +159,6 @@ func ChasePlayer():
 func _on_shot_cooldown_timeout():
 	reloading = false
 	pass # Replace with function body.
+
+func retire():
+	queue_free()
