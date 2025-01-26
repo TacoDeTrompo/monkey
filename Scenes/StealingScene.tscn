@@ -56,7 +56,7 @@ position = Vector2(529, 164)
 scale = Vector2(1.53884, 1.57419)
 sprite_frames = SubResource("SpriteFrames_e5kqa")
 autoplay = "default"
-frame_progress = 0.712693
+frame_progress = 0.185301
 
 [node name="Counter" type="TextureRect" parent="."]
 offset_left = 1.0

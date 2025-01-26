@@ -1,4 +1,5 @@
-extends State
+extends GameState
+class_name Drive
 
 
 @export var music_manager: MusicManager
@@ -6,6 +7,8 @@ extends State
 
 func Enter():
 	super()
+	state_name = "Drive"
+	get_tree().paused = false
 	music_manager.StartAudioStreamPlay("PersecusionIntro")
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=36 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
@@ -11,10 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 [ext_resource type="Texture2D" uid="uid://bqcwlssndjawt" path="res://Assets/Mirror/monkey_react_2.png" id="7_utxs2"]
 [ext_resource type="Texture2D" uid="uid://c5mwipoddo1cq" path="res://Assets/Mirror/monkey_react_3.png" id="8_hc2il"]
 [ext_resource type="Texture2D" uid="uid://3f51rmrkiba4" path="res://Assets/Mirror/monkey_react_1.png" id="9_2h6kx"]
+[ext_resource type="Texture2D" uid="uid://cm31fytq2poyh" path="res://Assets/map_1.jpg" id="10_0db41"]
+[ext_resource type="Texture2D" uid="uid://bltw5ryrbnxro" path="res://Assets/map_2.jpg" id="11_7so1l"]
 [ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="12_1npv4"]
 [ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
 [ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
@@ -24,6 +26,7 @@
 [ext_resource type="Script" path="res://Scripts/Sound/MusicLayerManager.gd" id="15_rp5e6"]
 [ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
 [ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
+[ext_resource type="PackedScene" uid="uid://mic4jptyhcrs" path="res://Landmarks/shop.tscn" id="27_skuhu"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
@@ -226,22 +229,41 @@ rotation = -0.120428
 sprite_frames = SubResource("SpriteFrames_px6q0")
 animation = &"chase"
 
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Map_1" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(-7485, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("10_0db41")
+
+[node name="Map_2" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(22031, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("11_7so1l")
+
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
+process_mode = 3
 initial_state = NodePath("Drive")
 
 [node name="Drive" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
 script = ExtResource("2_nd38h")
 music_manager = NodePath("../../Music")
 
-[node name="Shop" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
+[node name="Shop" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager", "subScene")]
 script = ExtResource("3_wcp6t")
 music_manager = NodePath("../../Music")
+subScene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
 
-[node name="Steal" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
+[node name="Steal" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager", "subScene")]
 script = ExtResource("4_3pt6j")
 music_manager = NodePath("../../Music")
+subScene = NodePath("../../UI/StealingSprite/SubViewportSteal/Stealing")
 
 [node name="Player" parent="." instance=ExtResource("5_wvhio")]
+process_mode = 1
+position = Vector2(45, -294)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-197, -244)
@@ -255,6 +277,7 @@ drag_vertical_enabled = true
 [node name="Gun" parent="Player" instance=ExtResource("7_sl73w")]
 
 [node name="Music" type="Node" parent="." node_paths=PackedStringArray("layeredSong")]
+process_mode = 3
 script = ExtResource("12_1npv4")
 layeredSong = NodePath("PersecusionLayers")
 
@@ -291,5 +314,11 @@ parameters/looping = true
 stream = ExtResource("17_ovewj")
 volume_db = -80.0
 parameters/looping = true
+
+[node name="Landmarks" type="Node2D" parent="."]
+
+[node name="Shop" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(883, -938)
+game_state_machine = NodePath("../../StateMachine")
 
 [connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]

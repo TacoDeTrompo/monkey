@@ -1,4 +1,5 @@
-extends State
+extends GameState
+class_name Steal
 
 
 @export var music_manager: MusicManager
@@ -7,6 +8,8 @@ extends State
 
 func Enter():
 	super()
+	state_name = "Steal"
+	get_tree().paused = true
 	music_manager.StartAudioStreamPlay("StealMusic")
 	for child in subScene.get_children():
 		if child.name == "StateMachine":
