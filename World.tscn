@@ -210,9 +210,14 @@ size = Vector2i(1000, 500)
 [node name="Broker" parent="UI/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
 pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
 
-[node name="MonkeyMirror" type="AnimatedSprite2D" parent="UI"]
-position = Vector2(168, 70)
+[node name="MirrorHolder" type="Node2D" parent="UI"]
+position = Vector2(163, 8)
+rotation = 0.0152145
+
+[node name="MonkeyMirror" type="AnimatedSprite2D" parent="UI/MirrorHolder"]
+position = Vector2(6.99998, 75)
 rotation = -0.120428
+scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_px6q0")
 animation = &"standard"
 
