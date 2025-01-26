@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=33 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
 [ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
@@ -11,7 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="Texture2D" uid="uid://bqcwlssndjawt" path="res://Assets/Mirror/monkey_react_2.png" id="7_utxs2"]
+[ext_resource type="Texture2D" uid="uid://c5mwipoddo1cq" path="res://Assets/Mirror/monkey_react_3.png" id="8_hc2il"]
+[ext_resource type="Texture2D" uid="uid://3f51rmrkiba4" path="res://Assets/Mirror/monkey_react_1.png" id="9_2h6kx"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="12_1npv4"]
 [ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
 [ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
 [ext_resource type="AudioStream" uid="uid://b2ofv1wdc4whg" path="res://Assets/Music/Persecusion/IntroPerse.mp3" id="14_71ip3"]
@@ -36,6 +40,45 @@ viewport_path = NodePath("UI/StealingSprite/SubViewportSteal")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_augr6"]
 viewport_path = NodePath("UI/BrokerSprite/SubViewportBroker")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7b3q"]
+atlas = ExtResource("7_utxs2")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2oeb"]
+atlas = ExtResource("8_hc2il")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5nui"]
+atlas = ExtResource("9_2h6kx")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_px6q0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7b3q")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2oeb")
+}],
+"loop": true,
+"name": &"money",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5nui")
+}],
+"loop": true,
+"name": &"standard",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
 position = Vector2(2823, 581)
@@ -166,6 +209,17 @@ size = Vector2i(1000, 500)
 
 [node name="Broker" parent="UI/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
 pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
+
+[node name="MirrorHolder" type="Node2D" parent="UI"]
+position = Vector2(163, 8)
+rotation = 0.0152145
+
+[node name="MonkeyMirror" type="AnimatedSprite2D" parent="UI/MirrorHolder"]
+position = Vector2(6.99998, 75)
+rotation = -0.120428
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_px6q0")
+animation = &"standard"
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
 initial_state = NodePath("Drive")
