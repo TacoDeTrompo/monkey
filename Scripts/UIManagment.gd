@@ -8,7 +8,7 @@ class_name UIManagment
 
 @export var monkey_mirror: AnimatedSprite2D
 @export var mirror_holder: Node2D
-
+var numberOfCops = 0
 var mirror_tilt = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -41,9 +41,8 @@ func _process(delta: float) -> void:
 	#
 	#if Input.is_action_just_pressed("right"): 
 		#player.bananas += 1
-		
+	numberOfCops = get_tree().get_nodes_in_group("Police").size()
 	handing_mirror(delta)
-	
 	pass
 
 func handing_mirror(delta):
@@ -53,8 +52,7 @@ func handing_mirror(delta):
 		return_to_standard = false
 		if(monkey_mirror.animation!="money"):
 			monkey_mirror.set_animation("money")
-	# TODO: get the police count based on children in a node
-	if(false):
+	if(numberOfCops > 18):
 		return_to_standard = false
 		if(monkey_mirror.animation!="chase"):
 			monkey_mirror.set_animation("chase")

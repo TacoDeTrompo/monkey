@@ -25,7 +25,7 @@ func Exit():
 	finished = false
 	speed = 1.0
 	pathFollow2D.progress_ratio = 0.0
-	player.spawnCops(2)
+	player.spawnCops()
 
 
 func accelerate(_delta:float):

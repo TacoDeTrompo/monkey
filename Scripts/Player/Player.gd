@@ -10,8 +10,6 @@ var bananas = 0
 var money = 10
 var oxygen = 100
 
-var stealing_count = 0
-
 var current_pitch = 0.5
 var current_steal = 0
 
@@ -72,16 +70,27 @@ func calculate_audio_pitch(delta):
 	pass
 
 func spawnCops():
-	#var numberOfCops = 	get_tree().get_nodes_in_group("Police")
 	var n = 0
 	current_steal += 1
-	while n < current_steal * 2:
-		print("POLICIA!!!!")
-		var cop = police.instantiate()
-		cop.position = position
-		get_parent().add_child(cop)
-func spawn_police():
-	stealing_count+=1
-	var police_to_spawn = stealing_count * 2
-	# TODO: spawn logic
-	pass
+	#while n < current_steal:
+		#n+=1
+	print("POLICIA!!!!")
+	var cop = police.instantiate()
+	var copSpawn: Vector2 = Vector2.ZERO
+	var spawnPos =  randf_range(-1000, 1000)
+	if spawnPos > 0: 
+		spawnPos +=1500
+	else:
+		spawnPos -=1500
+	copSpawn.x = position.x + spawnPos
+
+	spawnPos =  randf_range(-1000, 1000)
+	if spawnPos > 0: 
+		spawnPos +=1500
+	else:
+		spawnPos -=1500
+	copSpawn.y = position.y + spawnPos
+	
+	cop.position = copSpawn
+	get_parent().add_child(cop)
+#
