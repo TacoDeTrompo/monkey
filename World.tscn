@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
 [ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
 [ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
 [ext_resource type="Texture2D" uid="uid://bqcwlssndjawt" path="res://Assets/Mirror/monkey_react_2.png" id="7_utxs2"]
 [ext_resource type="Texture2D" uid="uid://c5mwipoddo1cq" path="res://Assets/Mirror/monkey_react_3.png" id="8_hc2il"]
 [ext_resource type="Texture2D" uid="uid://3f51rmrkiba4" path="res://Assets/Mirror/monkey_react_1.png" id="9_2h6kx"]

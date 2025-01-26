@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abd4w"]
 size = Vector2(182, 54)
 
-[node name="Police" type="CharacterBody2D"]
+[node name="Police" type="CharacterBody2D" groups=["Police"]]
 motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_8qcbk")

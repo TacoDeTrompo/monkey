@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6fqlxn6bloa5"]
+[gd_scene load_steps=7 format=3 uid="uid://bnr7uqgqejct4"]
 
-[ext_resource type="Texture2D" uid="uid://dtpvgipf60dvm" path="res://Assets/game_over.png" id="1_o01gx"]
+[ext_resource type="Texture2D" uid="uid://beknjq0c7x160" path="res://Assets/TITLE_CARD_FINAL.png" id="1_mdwhl"]
 [ext_resource type="Texture2D" uid="uid://c44ulae0lxtqi" path="res://Assets/Buttons/start.png" id="2_08453"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_us5y5"]
@@ -53,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_o01gx")
+texture = ExtResource("1_mdwhl")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)

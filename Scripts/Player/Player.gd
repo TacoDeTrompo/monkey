@@ -4,13 +4,14 @@ class_name PlayerBody2D
 @export var start_audio_player: AudioStreamPlayer2D
 @export var loop_audio_player: AudioStreamPlayer2D
 @export var player_state_machine: PlayerStateMachine
+@onready var police = preload("res://Characters/police.tscn")
 
 var bananas = 0
 var money = 10
 var oxygen = 100
 
 var current_pitch = 0.5
-var current_gear = 1
+var current_steal = 0
 
 # Aim
 # var cross = load("res://cross.png")
@@ -66,4 +67,15 @@ func calculate_audio_pitch(delta):
 	
 	start_audio_player.pitch_scale = current_pitch
 	loop_audio_player.pitch_scale = current_pitch
+	pass
+
+func spawnCops():
+	#var numberOfCops = 	get_tree().get_nodes_in_group("Police")
+	var n = 0
+	current_steal += 1
+	while n < current_steal * 2:
+		print("POLICIA!!!!")
+		var cop = police.instantiate()
+		cop.position = position
+		get_parent().add_child(cop)
 	pass
