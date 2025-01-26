@@ -74,17 +74,17 @@ texture = ExtResource("2_86f5e")
 position = Vector2(730, 258)
 scale = Vector2(1.90417, 1.87407)
 sprite_frames = SubResource("SpriteFrames_hqwyv")
-animation = &"selling"
+animation = &"bought"
 
 [node name="Banana" type="AnimatedSprite2D" parent="."]
 position = Vector2(474, 118)
 scale = Vector2(0.891829, 0.91471)
 sprite_frames = SubResource("SpriteFrames_mae0s")
 autoplay = "default"
-frame_progress = 0.606317
+frame_progress = 0.0368334
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
-initial_state = NodePath("SlidingIn")
+initial_state = NodePath("Static")
 
 [node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
 script = ExtResource("4_e2h5k")

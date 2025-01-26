@@ -37,6 +37,6 @@ script = ExtResource("5_fujh0")
 enemy = true
 
 [node name="Shot_Cooldown" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 
 [connection signal="timeout" from="Shot_Cooldown" to="." method="_on_shot_cooldown_timeout"]
