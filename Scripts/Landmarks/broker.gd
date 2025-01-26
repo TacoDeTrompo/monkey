@@ -3,9 +3,16 @@ class_name Broker
 var banana = true
 @export var cost = 300
 @export var game_state_machine: StateMachine
+@export var subscene: SubScene
+
+
+func banana_bought():
+	queue_free()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if subscene != null:
+		subscene.banana_bought.connect(self.banana_bought)
 	pass # Replace with function body.
 
 

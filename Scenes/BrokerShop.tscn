@@ -74,10 +74,10 @@ default_font_size = 70
 script = ExtResource("1_7gdyt")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_left = 2.0
-offset_top = -101.0
-offset_right = 1026.0
-offset_bottom = 582.0
+offset_left = -2.0
+offset_top = -104.0
+offset_right = 1022.0
+offset_bottom = 579.0
 texture = ExtResource("2_86f5e")
 
 [node name="BrokerSprite" type="AnimatedSprite2D" parent="."]

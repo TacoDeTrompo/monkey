@@ -5,6 +5,8 @@ class_name SubScene
 @export var playerNode: PlayerBody2D
 @export var mainGameStateMachine: StateMachine
 
+signal banana_bought
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

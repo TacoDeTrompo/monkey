@@ -321,8 +321,9 @@ parameters/looping = true
 position = Vector2(883, -938)
 game_state_machine = NodePath("../../StateMachine")
 
-[node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("28_xicea")]
+[node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
 position = Vector2(-262, -988)
 game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
 
 [connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]

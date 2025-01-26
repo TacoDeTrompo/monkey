@@ -86,5 +86,6 @@ func _on_success_noises_finished() -> void:
 		sfx_success_played = false
 		rootNode.playerNode.money -= cost
 		rootNode.playerNode.bananas += 1
+		rootNode.banana_bought.emit()
 		get_parent().on_child_transition(self, "SlidingOut")
 		bought = true

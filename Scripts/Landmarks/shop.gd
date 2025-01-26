@@ -3,6 +3,12 @@ class_name Shop
 var canRob = true
 @export var money = 300
 @export var game_state_machine: StateMachine
+@export var subscene: SubScene
+
+
+func self_delete():
+	queue_free()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,3 +47,4 @@ func rob():
 	else:
 		print("We dont have any money!")
 		return 0
+		
