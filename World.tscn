@@ -84,6 +84,7 @@ animations = [{
 position = Vector2(2823, 581)
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("bananas", "bubbles", "money_label", "player")]
+process_mode = 3
 script = ExtResource("1_kkuqg")
 bananas = [NodePath("InGame Interface/BananaCounter/Banana"), NodePath("InGame Interface/BananaCounter/Banana2"), NodePath("InGame Interface/BananaCounter/Banana3"), NodePath("InGame Interface/BananaCounter/Banana4"), NodePath("InGame Interface/BananaCounter/Banana5")]
 bubbles = [NodePath("InGame Interface/AirCounter/Bubble"), NodePath("InGame Interface/AirCounter/Bubble2"), NodePath("InGame Interface/AirCounter/Bubble3"), NodePath("InGame Interface/AirCounter/Bubble4"), NodePath("InGame Interface/AirCounter/Bubble5")]
@@ -197,8 +198,10 @@ texture = SubResource("ViewportTexture_moqrg")
 [node name="SubViewportSteal" type="SubViewport" parent="UI/StealingSprite"]
 size = Vector2i(1000, 500)
 
-[node name="Stealing" parent="UI/StealingSprite/SubViewportSteal" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("6_37p4o")]
+[node name="Stealing" parent="UI/StealingSprite/SubViewportSteal" node_paths=PackedStringArray("pathFollow2D", "playerNode", "mainGameStateMachine") instance=ExtResource("6_37p4o")]
 pathFollow2D = NodePath("../../../Path2D/ShopFollow")
+playerNode = NodePath("../../../../Player")
+mainGameStateMachine = NodePath("../../../../StateMachine")
 
 [node name="BrokerSprite" type="Sprite2D" parent="UI"]
 position = Vector2(-1880, 319)
@@ -207,8 +210,10 @@ texture = SubResource("ViewportTexture_augr6")
 [node name="SubViewportBroker" type="SubViewport" parent="UI/BrokerSprite"]
 size = Vector2i(1000, 500)
 
-[node name="Broker" parent="UI/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D") instance=ExtResource("7_hq5s5")]
+[node name="Broker" parent="UI/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D", "playerNode", "mainGameStateMachine") instance=ExtResource("7_hq5s5")]
 pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
+playerNode = NodePath("../../../../Player")
+mainGameStateMachine = NodePath("../../../../StateMachine")
 
 [node name="MirrorHolder" type="Node2D" parent="UI"]
 position = Vector2(163, 8)
@@ -217,7 +222,6 @@ rotation = 0.0152145
 [node name="MonkeyMirror" type="AnimatedSprite2D" parent="UI/MirrorHolder"]
 position = Vector2(6.99998, 75)
 rotation = -0.120428
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_px6q0")
 animation = &"standard"
 
