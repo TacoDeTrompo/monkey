@@ -1,19 +1,32 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkxn5yjqcabv"]
+[gd_scene load_steps=22 format=3 uid="uid://dkxn5yjqcabv"]
 
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
+[ext_resource type="Texture2D" uid="uid://dcgfoxrbam370" path="res://Assets/bubble_small.png" id="2_gboec"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
+[ext_resource type="Texture2D" uid="uid://cs0800kfnae1d" path="res://Assets/banana_2.png" id="3_k7bf4"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
+[ext_resource type="FontFile" uid="uid://b6sslsiw31vuy" path="res://Assets/Fonts/MoneyMoney-Regular.ttf" id="4_5htyb"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
-[ext_resource type="PackedScene" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
-[ext_resource type="PackedScene" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
-[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
+[ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
+[ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
+[ext_resource type="AudioStream" uid="uid://dgdmcwcr3dkt0" path="res://Assets/Music/Persecusion/Guitarra.mp3" id="14_ry810"]
+[ext_resource type="AudioStream" uid="uid://dfgn5upicy6xu" path="res://Assets/Music/Persecusion/percusion.mp3" id="15_3sjfv"]
+[ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
+[ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
 
 [sub_resource type="Curve2D" id="Curve2D_op0bq"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -2500, 0, 0, 0, 0, 0, -25, 0)
 }
 point_count = 2
+
+[sub_resource type="Theme" id="Theme_tfmao"]
+default_font = ExtResource("4_5htyb")
+default_font_size = 50
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_moqrg"]
 viewport_path = NodePath("UI/StealingSprite/SubViewportSteal")
@@ -43,6 +56,78 @@ rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="UI/Path2D/BrokerFollow"]
 remote_path = NodePath("../../../BrokerSprite")
+
+[node name="InGame Interface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="BananaCounter" type="GridContainer" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 508.0
+offset_right = 798.0
+offset_bottom = 631.0
+columns = 5
+
+[node name="Banana" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana2" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana3" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana4" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana5" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="AirCounter" type="GridContainer" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 19.0
+offset_right = 756.0
+offset_bottom = 85.0
+columns = 5
+
+[node name="Bubble" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble2" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble3" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble4" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble5" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Label" type="Label" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 843.0
+offset_top = 566.0
+offset_right = 1118.0
+offset_bottom = 617.0
+theme = SubResource("Theme_tfmao")
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "$999999999"
 
 [node name="StealingSprite" type="Sprite2D" parent="UI"]
 position = Vector2(-1880, 319)
@@ -89,3 +174,32 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="Gun" parent="Player" instance=ExtResource("7_sl73w")]
+
+[node name="Music" type="Node" parent="."]
+
+[node name="ShopMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("12_vtq40")
+autoplay = true
+parameters/looping = true
+
+[node name="StealMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("13_dm146")
+parameters/looping = true
+
+[node name="PersecusionLayers" type="Node" parent="Music"]
+
+[node name="Guitar" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("14_ry810")
+parameters/looping = true
+
+[node name="Percussion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("15_3sjfv")
+parameters/looping = true
+
+[node name="Accordion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("16_ylmjm")
+parameters/looping = true
+
+[node name="Violin" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("17_ovewj")
+parameters/looping = true
