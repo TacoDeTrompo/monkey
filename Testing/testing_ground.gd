@@ -11,6 +11,8 @@ func _process(delta):
 	#if Input.is_action_just_pressed("pause"):
 		#pauseMenu()
 		#pass
+	if Input.is_key_pressed(KEY_L):
+		get_tree().change_scene_to_file("res://game_over.tscn")
 	pass
 
 func pauseMenu():
