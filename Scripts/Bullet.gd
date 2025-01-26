@@ -1,13 +1,24 @@
 extends Node2D
 
+@export var bullet_sprite: Sprite2D
+@export var enemey_bullet_texture: Texture2D
+@export var player_bullet_texture: Texture2D
 
 const SPEED: int = 2000
 var enemy: bool = true
 var damage: int = 1
 
+func _ready() -> void:
+	if(enemy):
+		bullet_sprite.texture = enemey_bullet_texture
+	else:
+		bullet_sprite.texture = player_bullet_texture
+	
+	bullet_sprite.visible = true
+	pass
+
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta
- 
  
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

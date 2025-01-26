@@ -1,5 +1,7 @@
 extends Sprite2D
-
+class_name Broker
+var banana = true
+@export var cost = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,3 +25,16 @@ func _on_area_2d_body_exited(body):
 		print("Bye~")
 		#Deshabilitar UI de compra
 	pass # Replace with function body.
+
+func buyBanana(currentMoney:int):
+	if currentMoney >= cost and banana:
+		banana = false
+		#queue_free()
+		currentMoney -= cost
+		return currentMoney
+	else:
+		print("You need more money!")
+		return currentMoney
+
+func getCost():
+	return cost

@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c17oick3chwpk"]
+[gd_scene load_steps=10 format=3 uid="uid://c17oick3chwpk"]
 
+[ext_resource type="Texture2D" uid="uid://cm31fytq2poyh" path="res://Assets/map_1.jpg" id="1_44dd3"]
 [ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_pfkap"]
+[ext_resource type="Texture2D" uid="uid://bltw5ryrbnxro" path="res://Assets/map_2.jpg" id="2_0fbvi"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_5fvny"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_ofhne"]
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_hoioq"]
@@ -39,3 +41,17 @@ z_index = -10
 position = Vector2(7348, -8092)
 scale = Vector2(220, 220)
 texture = ExtResource("6_hpcjq")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Map_1" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(-7485, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("1_44dd3")
+
+[node name="Map_2" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(22031, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("2_0fbvi")
