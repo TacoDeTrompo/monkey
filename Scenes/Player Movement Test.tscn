@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_hoioq"]
 [ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_0cp7i"]
 [ext_resource type="Texture2D" uid="uid://bxc8w4l38u1p7" path="res://Assets/map_reference.png" id="6_hpcjq"]
-[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="6_nkck0"]
+[ext_resource type="PackedScene" path="res://Scenes/Gun.tscn" id="6_nkck0"]
 
 [node name="World" type="Node2D"]
 

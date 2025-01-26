@@ -12,7 +12,16 @@ var finished: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	name_of_state = "SlidingIn"
 	pathFollow2D = parentSubScene.pathFollow2D
+	
+	
+func Enter():
+	super()
+	finished = false
+	progress = 0.0
+	speed = 1.0
+	pathFollow2D.progress_ratio = progress
 	
 	
 func accelerate(_delta:float):
@@ -34,17 +43,17 @@ func Update():
 
 
 func Physics_Update(_delta:float):
-	print(speed)
-	if progress >= 1.0:
-		progress = 1.0
-		speed = 0.0
-	if pathFollow2D.progress_ratio < 0.2 && progress < 1.0:
-		accelerate(_delta)
-	else:
-		decelarate(_delta)
-	progress += speed * _delta
-	if progress > 1.0:
-		progress = 1.0
-	if progress <= 0.991 && finished == true:
-		progress = 0.991
-	pathFollow2D.progress_ratio = progress
+	if get_parent().current_state.name_of_state == "SlidingIn":
+		if progress >= 1.0:
+			progress = 1.0
+			speed = 0.0
+		if pathFollow2D.progress_ratio < 0.2 && progress < 1.0:
+			accelerate(_delta)
+		else:
+			decelarate(_delta)
+		progress += speed * _delta
+		if progress > 1.0:
+			progress = 1.0
+		if progress <= 0.991 && finished == true:
+			progress = 0.991
+		pathFollow2D.progress_ratio = progress

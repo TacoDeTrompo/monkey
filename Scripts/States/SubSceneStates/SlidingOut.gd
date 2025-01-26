@@ -13,7 +13,15 @@ var finished: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	name_of_state = "SlidingOut"
 	pathFollow2D = parentSubScene.pathFollow2D
+
+
+func Exit():
+	super()
+	finished = false
+	speed = 1.0
+	pathFollow2D.progress_ratio = 0.0
 
 
 func accelerate(_delta:float):
@@ -27,15 +35,18 @@ func decelarate(_delta:float):
 
 func Update():
 	if progress <= 0.0:
+		pathFollow2D.progress_ratio = 0.0
 		get_parent().on_child_transition(self, "Static")
 		var currentState: State = parentSubScene.mainGameStateMachine.current_state
 		parentSubScene.mainGameStateMachine.on_child_transition(currentState, "Drive")
 
 
 func Physics_Update(_delta:float):
-	print(speed)
-	decelarate(_delta)
-	progress -= speed * _delta
-	if progress <= 0.0:
-		progress = 0.0
-	pathFollow2D.progress_ratio = progress
+	if get_parent().current_state.name_of_state == "SlidingOut":
+		decelarate(_delta)
+		if speed == 0.0:
+			speed = 0.0
+		progress -= speed * _delta
+		if progress <= 0.0:
+			progress = 0.0
+		pathFollow2D.progress_ratio = progress

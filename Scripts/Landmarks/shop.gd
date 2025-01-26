@@ -2,6 +2,7 @@ extends StaticBody2D
 class_name Shop
 var canRob = true
 @export var money = 300
+@export var game_state_machine: StateMachine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,8 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player")  and canRob:
-		rob()
+		game_state_machine.on_child_transition(game_state_machine.current_state, "Steal")
+		#rob()
 		#Dar dinero al jugador o al gamemode/mapa
 	pass # Replace with function body.
 

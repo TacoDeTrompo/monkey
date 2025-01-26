@@ -90,7 +90,7 @@ position = Vector2(570, 114)
 scale = Vector2(0.891829, 0.91471)
 sprite_frames = SubResource("SpriteFrames_mae0s")
 autoplay = "default"
-frame_progress = 0.910636
+frame_progress = 0.924465
 
 [node name="Banana2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -98,7 +98,7 @@ position = Vector2(752, 309)
 scale = Vector2(1.44591, 1.56694)
 sprite_frames = SubResource("SpriteFrames_mae0s")
 autoplay = "default"
-frame_progress = 0.668629
+frame_progress = 0.682456
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
 initial_state = NodePath("Static")
