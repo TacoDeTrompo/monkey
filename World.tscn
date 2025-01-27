@@ -341,7 +341,7 @@ position = Vector2(-4695, -10372)
 game_state_machine = NodePath("../../StateMachine")
 
 [node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
-position = Vector2(-262, -988)
+position = Vector2(-1180, -1273)
 game_state_machine = NodePath("../../StateMachine")
 subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
 
