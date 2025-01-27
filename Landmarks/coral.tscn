@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbukttbmoeyc"]
+
+[ext_resource type="Texture2D" uid="uid://6874mhknbvkn" path="res://Assets/coral.png" id="1_1h66k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nd7f4"]
+
+[node name="Coral" type="StaticBody2D"]
+scale = Vector2(3, 3)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1h66k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(9.79922, 9.79922)
+shape = SubResource("CircleShape2D_nd7f4")
+debug_color = Color(1, 0.00441436, 0.0654834, 0.42)

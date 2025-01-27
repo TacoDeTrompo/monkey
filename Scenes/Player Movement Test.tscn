@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://c17oick3chwpk"]
+
+[ext_resource type="Texture2D" uid="uid://cm31fytq2poyh" path="res://Assets/map_1.jpg" id="1_44dd3"]
+[ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_pfkap"]
+[ext_resource type="Texture2D" uid="uid://bltw5ryrbnxro" path="res://Assets/map_2.jpg" id="2_0fbvi"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_5fvny"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_ofhne"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_hoioq"]
+[ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_0cp7i"]
+[ext_resource type="Texture2D" uid="uid://bxc8w4l38u1p7" path="res://Assets/map_reference.png" id="6_hpcjq"]
+[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="6_nkck0"]
+
+[node name="World" type="Node2D"]
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_pfkap")]
+initial_state = NodePath("Drive")
+
+[node name="Drive" type="Node" parent="StateMachine"]
+script = ExtResource("2_5fvny")
+
+[node name="Shop" type="Node" parent="StateMachine"]
+script = ExtResource("3_ofhne")
+
+[node name="Steal" type="Node" parent="StateMachine"]
+script = ExtResource("4_hoioq")
+
+[node name="Player" parent="." instance=ExtResource("5_0cp7i")]
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+zoom = Vector2(0.3, 0.3)
+limit_smoothed = true
+position_smoothing_speed = 0.5
+rotation_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="Gun" parent="Player" instance=ExtResource("6_nkck0")]
+
+[node name="Map2D" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(7348, -8092)
+scale = Vector2(220, 220)
+texture = ExtResource("6_hpcjq")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Map_1" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(-7485, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("1_44dd3")
+
+[node name="Map_2" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(22031, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("2_0fbvi")

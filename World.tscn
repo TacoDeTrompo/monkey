@@ -1,8 +1,431 @@
-[gd_scene load_steps=2 format=3 uid="uid://fyovte5cqh34"]
+[gd_scene load_steps=39 format=3 uid="uid://dkxn5yjqcabv"]
 
-[ext_resource type="Script" path="res://State_Machine.gd" id="1_c2wux"]
+[ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="1_an03c"]
+[ext_resource type="Script" path="res://Scripts/UIManagment.gd" id="1_kkuqg"]
+[ext_resource type="Texture2D" uid="uid://dcgfoxrbam370" path="res://Assets/bubble_small.png" id="2_gboec"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Drive.gd" id="2_nd38h"]
+[ext_resource type="Texture2D" uid="uid://cs0800kfnae1d" path="res://Assets/banana_2.png" id="3_k7bf4"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Shop.gd" id="3_wcp6t"]
+[ext_resource type="Script" path="res://Scripts/States/GameStates/Steal.gd" id="4_3pt6j"]
+[ext_resource type="FontFile" uid="uid://b6sslsiw31vuy" path="res://Assets/Fonts/MoneyMoney-Regular.ttf" id="4_5htyb"]
+[ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="5_wvhio"]
+[ext_resource type="PackedScene" uid="uid://q1n8b627aawp" path="res://Scenes/StealingScene.tscn" id="6_37p4o"]
+[ext_resource type="PackedScene" uid="uid://cy2qkbeoi5cso" path="res://Scenes/BrokerShop.tscn" id="7_hq5s5"]
+[ext_resource type="PackedScene" uid="uid://smmg1662q6vw" path="res://Scenes/Gun.tscn" id="7_sl73w"]
+[ext_resource type="Texture2D" uid="uid://bqcwlssndjawt" path="res://Assets/Mirror/monkey_react_2.png" id="7_utxs2"]
+[ext_resource type="Texture2D" uid="uid://c5mwipoddo1cq" path="res://Assets/Mirror/monkey_react_3.png" id="8_hc2il"]
+[ext_resource type="Texture2D" uid="uid://3f51rmrkiba4" path="res://Assets/Mirror/monkey_react_1.png" id="9_2h6kx"]
+[ext_resource type="Texture2D" uid="uid://cm31fytq2poyh" path="res://Assets/map_1.jpg" id="10_0db41"]
+[ext_resource type="Texture2D" uid="uid://bltw5ryrbnxro" path="res://Assets/map_2.jpg" id="11_7so1l"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicManager.gd" id="12_1npv4"]
+[ext_resource type="AudioStream" uid="uid://c6wvuh3h1mw3o" path="res://Assets/Music/Shop.mp3" id="12_vtq40"]
+[ext_resource type="AudioStream" uid="uid://b1hj0fqxiaoj4" path="res://Assets/Music/Asaltodeaverdis.mp3" id="13_dm146"]
+[ext_resource type="AudioStream" uid="uid://b2ofv1wdc4whg" path="res://Assets/Music/Persecusion/IntroPerse.mp3" id="14_71ip3"]
+[ext_resource type="AudioStream" uid="uid://dgdmcwcr3dkt0" path="res://Assets/Music/Persecusion/Guitarra.mp3" id="14_ry810"]
+[ext_resource type="AudioStream" uid="uid://dfgn5upicy6xu" path="res://Assets/Music/Persecusion/percusion.mp3" id="15_3sjfv"]
+[ext_resource type="Script" path="res://Scripts/Sound/MusicLayerManager.gd" id="15_rp5e6"]
+[ext_resource type="AudioStream" uid="uid://868tovwi6e85" path="res://Assets/Music/Persecusion/Acordion.mp3" id="16_ylmjm"]
+[ext_resource type="AudioStream" uid="uid://d3dmmc5hv5ws0" path="res://Assets/Music/Persecusion/Violin.mp3" id="17_ovewj"]
+[ext_resource type="PackedScene" uid="uid://mic4jptyhcrs" path="res://Landmarks/shop.tscn" id="27_skuhu"]
+[ext_resource type="PackedScene" uid="uid://cngadhih6vrpi" path="res://Landmarks/broker.tscn" id="28_xicea"]
+[ext_resource type="PackedScene" uid="uid://bsqd7dxu0uoof" path="res://Landmarks/bubble_spawner.tscn" id="29_jww77"]
+[ext_resource type="PackedScene" uid="uid://dvbukttbmoeyc" path="res://Landmarks/coral.tscn" id="30_fmtw3"]
+
+[sub_resource type="Curve2D" id="Curve2D_op0bq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -2500, 0, 0, 0, 0, 0, -25, 0)
+}
+point_count = 2
+
+[sub_resource type="Theme" id="Theme_tfmao"]
+default_font = ExtResource("4_5htyb")
+default_font_size = 50
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_moqrg"]
+viewport_path = NodePath("UI/StealingSprite/SubViewportSteal")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_augr6"]
+viewport_path = NodePath("UI/BrokerSprite/SubViewportBroker")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7b3q"]
+atlas = ExtResource("7_utxs2")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2oeb"]
+atlas = ExtResource("8_hc2il")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5nui"]
+atlas = ExtResource("9_2h6kx")
+region = Rect2(0, 0, 312, 98)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_px6q0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7b3q")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2oeb")
+}],
+"loop": true,
+"name": &"money",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5nui")
+}],
+"loop": true,
+"name": &"standard",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
+position = Vector2(2823, 581)
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("1_c2wux")
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("bananas", "bubbles", "money_label", "player", "monkey_mirror", "mirror_holder")]
+process_mode = 3
+script = ExtResource("1_kkuqg")
+bananas = [NodePath("InGame Interface/BananaCounter/Banana"), NodePath("InGame Interface/BananaCounter/Banana2"), NodePath("InGame Interface/BananaCounter/Banana3"), NodePath("InGame Interface/BananaCounter/Banana4"), NodePath("InGame Interface/BananaCounter/Banana5")]
+bubbles = [NodePath("InGame Interface/AirCounter/Bubble"), NodePath("InGame Interface/AirCounter/Bubble2"), NodePath("InGame Interface/AirCounter/Bubble3"), NodePath("InGame Interface/AirCounter/Bubble4"), NodePath("InGame Interface/AirCounter/Bubble5")]
+money_label = NodePath("InGame Interface/Label")
+player = NodePath("../Player")
+monkey_mirror = NodePath("MirrorHolder/MonkeyMirror")
+mirror_holder = NodePath("MirrorHolder")
+
+[node name="Path2D" type="Path2D" parent="UI"]
+position = Vector2(620, 319)
+curve = SubResource("Curve2D_op0bq")
+
+[node name="ShopFollow" type="PathFollow2D" parent="UI/Path2D"]
+position = Vector2(-2500, 0)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="UI/Path2D/ShopFollow"]
+remote_path = NodePath("../../../StealingSprite")
+
+[node name="BrokerFollow" type="PathFollow2D" parent="UI/Path2D"]
+position = Vector2(-2500, 0)
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="UI/Path2D/BrokerFollow"]
+remote_path = NodePath("../../../BrokerSprite")
+
+[node name="InGame Interface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="BananaCounter" type="GridContainer" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 508.0
+offset_right = 798.0
+offset_bottom = 631.0
+columns = 5
+
+[node name="Banana" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana2" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana3" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana4" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="Banana5" type="TextureRect" parent="UI/InGame Interface/BananaCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_k7bf4")
+
+[node name="AirCounter" type="GridContainer" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 19.0
+offset_right = 756.0
+offset_bottom = 85.0
+columns = 5
+
+[node name="Bubble" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble2" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble3" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble4" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Bubble5" type="TextureRect" parent="UI/InGame Interface/AirCounter"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gboec")
+
+[node name="Label" type="Label" parent="UI/InGame Interface"]
+layout_mode = 0
+offset_left = 843.0
+offset_top = 566.0
+offset_right = 1118.0
+offset_bottom = 617.0
+theme = SubResource("Theme_tfmao")
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "$999999999"
+
+[node name="StealingSprite" type="Sprite2D" parent="UI"]
+position = Vector2(-1880, 319)
+texture = SubResource("ViewportTexture_moqrg")
+
+[node name="SubViewportSteal" type="SubViewport" parent="UI/StealingSprite"]
+size = Vector2i(1000, 500)
+
+[node name="Stealing" parent="UI/StealingSprite/SubViewportSteal" node_paths=PackedStringArray("pathFollow2D", "playerNode", "mainGameStateMachine") instance=ExtResource("6_37p4o")]
+pathFollow2D = NodePath("../../../Path2D/ShopFollow")
+playerNode = NodePath("../../../../Player")
+mainGameStateMachine = NodePath("../../../../StateMachine")
+
+[node name="BrokerSprite" type="Sprite2D" parent="UI"]
+position = Vector2(-1880, 319)
+texture = SubResource("ViewportTexture_augr6")
+
+[node name="SubViewportBroker" type="SubViewport" parent="UI/BrokerSprite"]
+size = Vector2i(1000, 500)
+
+[node name="Broker" parent="UI/BrokerSprite/SubViewportBroker" node_paths=PackedStringArray("pathFollow2D", "playerNode", "mainGameStateMachine") instance=ExtResource("7_hq5s5")]
+pathFollow2D = NodePath("../../../Path2D/BrokerFollow")
+playerNode = NodePath("../../../../Player")
+mainGameStateMachine = NodePath("../../../../StateMachine")
+
+[node name="MirrorHolder" type="Node2D" parent="UI"]
+position = Vector2(163, 8)
+
+[node name="MonkeyMirror" type="AnimatedSprite2D" parent="UI/MirrorHolder"]
+position = Vector2(6.99998, 75)
+rotation = -0.120428
+sprite_frames = SubResource("SpriteFrames_px6q0")
+animation = &"chase"
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Map_1" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(-7485, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("10_0db41")
+
+[node name="Map_2" type="Sprite2D" parent="Map"]
+z_index = -9
+position = Vector2(22031, -8308)
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("11_7so1l")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_an03c")]
+process_mode = 3
+initial_state = NodePath("Drive")
+
+[node name="Drive" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager")]
+script = ExtResource("2_nd38h")
+music_manager = NodePath("../../Music")
+
+[node name="Shop" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager", "subScene")]
+script = ExtResource("3_wcp6t")
+music_manager = NodePath("../../Music")
+subScene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Steal" type="Node" parent="StateMachine" node_paths=PackedStringArray("music_manager", "subScene")]
+script = ExtResource("4_3pt6j")
+music_manager = NodePath("../../Music")
+subScene = NodePath("../../UI/StealingSprite/SubViewportSteal/Stealing")
+
+[node name="Player" parent="." instance=ExtResource("5_wvhio")]
+process_mode = 1
+position = Vector2(45, -294)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-197, -244)
+zoom = Vector2(0.3, 0.3)
+limit_smoothed = true
+position_smoothing_speed = 0.5
+rotation_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="Gun" parent="Player" instance=ExtResource("7_sl73w")]
+
+[node name="Music" type="Node" parent="." node_paths=PackedStringArray("layeredSong")]
+process_mode = 3
+script = ExtResource("12_1npv4")
+layeredSong = NodePath("PersecusionLayers")
+
+[node name="ShopMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("12_vtq40")
+parameters/looping = true
+
+[node name="StealMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("13_dm146")
+parameters/looping = true
+
+[node name="PersecusionIntro" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("14_71ip3")
+autoplay = true
+
+[node name="PersecusionLayers" type="Node" parent="Music"]
+script = ExtResource("15_rp5e6")
+
+[node name="Guitar" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("14_ry810")
+parameters/looping = true
+
+[node name="Percussion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("15_3sjfv")
+volume_db = -80.0
+parameters/looping = true
+
+[node name="Accordion" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("16_ylmjm")
+volume_db = -80.0
+parameters/looping = true
+
+[node name="Violin" type="AudioStreamPlayer" parent="Music/PersecusionLayers"]
+stream = ExtResource("17_ovewj")
+volume_db = -80.0
+parameters/looping = true
+
+[node name="Landmarks" type="Node2D" parent="."]
+
+[node name="Shop" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(883, -938)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop2" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(9115, -3090)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop3" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(8557, -14387)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop4" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(21676, -8884)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Shop5" parent="Landmarks" node_paths=PackedStringArray("game_state_machine") instance=ExtResource("27_skuhu")]
+position = Vector2(-4695, -10372)
+game_state_machine = NodePath("../../StateMachine")
+
+[node name="Broker" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(-1180, -1273)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker2" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(6386, -1874)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker3" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(7237, -7985)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker4" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(14748, -35)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="Broker5" parent="Landmarks" node_paths=PackedStringArray("game_state_machine", "subscene") instance=ExtResource("28_xicea")]
+position = Vector2(16504, -12182)
+game_state_machine = NodePath("../../StateMachine")
+subscene = NodePath("../../UI/BrokerSprite/SubViewportBroker/Broker")
+
+[node name="BubbleSpawner" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(2367, -99)
+
+[node name="BubbleSpawner2" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(3891, -10514)
+
+[node name="BubbleSpawner3" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(-4373, -5353)
+
+[node name="BubbleSpawner4" parent="Landmarks" instance=ExtResource("29_jww77")]
+position = Vector2(20880, -6098)
+
+[node name="Coral3" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2601, -11690)
+
+[node name="Coral4" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(22216, -7452)
+
+[node name="Coral5" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(19757, -6189)
+
+[node name="Coral6" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(22114, -6031)
+
+[node name="Coral7" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(20973, -5047)
+
+[node name="Coral8" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(20987, -7214)
+
+[node name="Coral9" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2269, -1444)
+
+[node name="Coral10" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(3980, -756)
+
+[node name="Coral13" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2173, -10361)
+
+[node name="Coral14" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(1052, 559)
+
+[node name="Coral15" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(2811, 552)
+
+[node name="Coral16" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-3963, -4665)
+
+[node name="Coral17" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-3915, -6054)
+
+[node name="Coral18" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(-5732, -5311)
+
+[node name="Coral19" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(4504, -11168)
+
+[node name="Coral20" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(4998, -9818)
+
+[node name="Coral21" parent="Landmarks" instance=ExtResource("30_fmtw3")]
+position = Vector2(3325, -9132)
+
+[connection signal="finished" from="Music/PersecusionIntro" to="Music/PersecusionLayers" method="_on_persecusion_intro_finished"]

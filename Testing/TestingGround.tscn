@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfn6115afbfby"]
+
+[ext_resource type="PackedScene" uid="uid://b6p3ffb24opg6" path="res://Scenes/Player.tscn" id="1_7ijjk"]
+[ext_resource type="Script" path="res://Testing/testing_ground.gd" id="1_aj21n"]
+[ext_resource type="PackedScene" uid="uid://cngadhih6vrpi" path="res://Landmarks/broker.tscn" id="3_58uwb"]
+[ext_resource type="PackedScene" uid="uid://cmpg80o4k4tqt" path="res://Landmarks/bubble.tscn" id="4_3onpa"]
+[ext_resource type="PackedScene" uid="uid://dvbukttbmoeyc" path="res://Landmarks/coral.tscn" id="5_p8fsp"]
+[ext_resource type="PackedScene" uid="uid://mic4jptyhcrs" path="res://Landmarks/shop.tscn" id="6_eaffh"]
+[ext_resource type="PackedScene" uid="uid://bsqd7dxu0uoof" path="res://Landmarks/bubble_spawner.tscn" id="7_muluv"]
+[ext_resource type="PackedScene" uid="uid://c8twpn7a72vmo" path="res://UI/pause_menu.tscn" id="9_upbwx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_aj21n")
+
+[node name="Player" parent="." instance=ExtResource("1_7ijjk")]
+position = Vector2(202, 176)
+script = null
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="PauseMenu" parent="Camera2D" instance=ExtResource("9_upbwx")]
+visible = false
+scale = Vector2(10, 10)
+
+[node name="Broker" parent="." instance=ExtResource("3_58uwb")]
+position = Vector2(122, -373)
+
+[node name="Bubble" parent="." instance=ExtResource("4_3onpa")]
+position = Vector2(605, 333)
+
+[node name="Coral" parent="." instance=ExtResource("5_p8fsp")]
+position = Vector2(870, -162)
+
+[node name="Shop" parent="." instance=ExtResource("6_eaffh")]
+position = Vector2(-606, 346)
+
+[node name="BubbleSpawner" parent="." instance=ExtResource("7_muluv")]
+position = Vector2(-661, -573)

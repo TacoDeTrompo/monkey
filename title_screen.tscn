@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnr7uqgqejct4"]
+
+[ext_resource type="Script" path="res://title_screen.gd" id="1_i1nl7"]
+[ext_resource type="Texture2D" uid="uid://beknjq0c7x160" path="res://Assets/TITLE_CARD_FINAL.png" id="1_mdwhl"]
+[ext_resource type="Texture2D" uid="uid://c44ulae0lxtqi" path="res://Assets/Buttons/start.png" id="2_08453"]
+[ext_resource type="AudioStream" uid="uid://c0inve411a8ky" path="res://Assets/Music/Titulos.mp3" id="3_ggtlh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_us5y5"]
+font_size = 64
+
+[sub_resource type="Animation" id="Animation_nppd3"]
+resource_name = "Die"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gngdv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5d08"]
+_data = {
+"Die": SubResource("Animation_nppd3"),
+"RESET": SubResource("Animation_gngdv")
+}
+
+[node name="Title_Screen" type="Node2D"]
+script = ExtResource("1_i1nl7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mdwhl")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 365.0
+offset_bottom = 142.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_us5y5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+icon = ExtResource("2_08453")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p5d08")
+}
+autoplay = "Die"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ggtlh")
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

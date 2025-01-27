@@ -1,0 +1,163 @@
+[gd_scene load_steps=24 format=3 uid="uid://cy2qkbeoi5cso"]
+
+[ext_resource type="Script" path="res://Scripts/SubScenes/SubScene.gd" id="1_7gdyt"]
+[ext_resource type="Texture2D" uid="uid://bj87kqpsa0krd" path="res://Assets/banana_broker_background.png" id="2_86f5e"]
+[ext_resource type="PackedScene" uid="uid://con7c3kf5lyj8" path="res://Components/state_machine.tscn" id="3_50mk5"]
+[ext_resource type="Texture2D" uid="uid://3xn20kq2nheo" path="res://Assets/banana_broker_2.png" id="3_u54o0"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingIn.gd" id="4_e2h5k"]
+[ext_resource type="Texture2D" uid="uid://bdd8qlqw6aj01" path="res://Assets/banana_broker_1.png" id="4_vciix"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/Static.gd" id="5_0xrjg"]
+[ext_resource type="Texture2D" uid="uid://dpimnhvqrufl" path="res://Assets/banana.png" id="5_2a6sb"]
+[ext_resource type="Script" path="res://Scripts/States/SubSceneStates/SlidingOut.gd" id="6_4kxbb"]
+[ext_resource type="Texture2D" uid="uid://cs0800kfnae1d" path="res://Assets/banana_2.png" id="6_23sun"]
+[ext_resource type="AudioStream" uid="uid://bxtiwsk84o31j" path="res://Assets/SFX/celebration.mp3" id="11_g5dff"]
+[ext_resource type="AudioStream" uid="uid://bfeyu32ld35l0" path="res://Assets/SFX/angry.mp3" id="12_0jtno"]
+[ext_resource type="Texture2D" uid="uid://bmeeggjprn0ra" path="res://Assets/TextBoxes/messages_not_enough.png" id="12_5p62r"]
+[ext_resource type="Texture2D" uid="uid://ci0wwxpjop47h" path="res://Assets/TextBoxes/buy.png" id="13_2f6gh"]
+[ext_resource type="Texture2D" uid="uid://benuxrqsshiir" path="res://Assets/TextBoxes/message_empty.png" id="14_27i6p"]
+[ext_resource type="FontFile" uid="uid://b6sslsiw31vuy" path="res://Assets/Fonts/MoneyMoney-Regular.ttf" id="15_mlpsr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gd2s"]
+atlas = ExtResource("3_u54o0")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amsr8"]
+atlas = ExtResource("4_vciix")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqwyv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gd2s")
+}],
+"loop": true,
+"name": &"bought",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amsr8")
+}],
+"loop": true,
+"name": &"selling",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iv5o"]
+atlas = ExtResource("5_2a6sb")
+region = Rect2(0, 0, 138, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gi8r1"]
+atlas = ExtResource("6_23sun")
+region = Rect2(0, 0, 102, 123)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mae0s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iv5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gi8r1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_2vv7i"]
+default_font = ExtResource("15_mlpsr")
+default_font_size = 70
+
+[node name="Broker" type="Node2D"]
+script = ExtResource("1_7gdyt")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -2.0
+offset_top = -104.0
+offset_right = 1022.0
+offset_bottom = 579.0
+texture = ExtResource("2_86f5e")
+
+[node name="BrokerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(826, 254)
+scale = Vector2(1.90417, 1.87407)
+sprite_frames = SubResource("SpriteFrames_hqwyv")
+animation = &"selling"
+
+[node name="Banana" type="AnimatedSprite2D" parent="."]
+position = Vector2(570, 114)
+scale = Vector2(0.891829, 0.91471)
+sprite_frames = SubResource("SpriteFrames_mae0s")
+autoplay = "default"
+frame_progress = 0.924465
+
+[node name="Banana2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(752, 309)
+scale = Vector2(1.44591, 1.56694)
+sprite_frames = SubResource("SpriteFrames_mae0s")
+autoplay = "default"
+frame_progress = 0.682456
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_50mk5")]
+initial_state = NodePath("Static")
+
+[node name="SlidingIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
+script = ExtResource("4_e2h5k")
+parentSubScene = NodePath("../..")
+
+[node name="Static" type="Node" parent="StateMachine" node_paths=PackedStringArray("sfx_angry", "sfx_success", "brokerSprite", "rootNode", "notenough", "buy", "banana", "banana2", "moneyLabel")]
+script = ExtResource("5_0xrjg")
+sfx_angry = NodePath("../../AngryNoises")
+sfx_success = NodePath("../../SuccessNoises")
+brokerSprite = NodePath("../../BrokerSprite")
+rootNode = NodePath("../..")
+notenough = NodePath("../../NotEnough")
+buy = NodePath("../../Buy")
+banana = NodePath("../../Banana")
+banana2 = NodePath("../../Banana2")
+moneyLabel = NodePath("../../Cost/Label")
+
+[node name="SlidingOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("parentSubScene")]
+script = ExtResource("6_4kxbb")
+parentSubScene = NodePath("../..")
+
+[node name="SuccessNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_g5dff")
+volume_db = -10.0
+
+[node name="AngryNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_0jtno")
+volume_db = -15.0
+
+[node name="NotEnough" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(528, 380)
+texture = ExtResource("12_5p62r")
+
+[node name="Buy" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(346, 379)
+texture = ExtResource("13_2f6gh")
+
+[node name="Cost" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Cost"]
+position = Vector2(262, 164)
+texture = ExtResource("14_27i6p")
+
+[node name="Label" type="Label" parent="Cost"]
+offset_left = 80.0
+offset_top = 130.0
+offset_right = 437.0
+offset_bottom = 201.0
+theme = SubResource("Theme_2vv7i")
+theme_override_colors/font_color = Color(0, 0.592157, 0, 1)
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="finished" from="SuccessNoises" to="StateMachine/Static" method="_on_success_noises_finished"]
+[connection signal="finished" from="AngryNoises" to="StateMachine/Static" method="_on_angry_noises_finished"]

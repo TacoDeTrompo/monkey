@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://mic4jptyhcrs"]
+
+[ext_resource type="Script" path="res://Scripts/Landmarks/shop.gd" id="1_frhmt"]
+[ext_resource type="Texture2D" uid="uid://b36qoljg0rhkk" path="res://Assets/store.png" id="2_035eh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oe1n8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvuyk"]
+size = Vector2(128, 130)
+
+[node name="Shop" type="StaticBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_frhmt")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_035eh")
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+scale = Vector2(20.0427, 20.0427)
+shape = SubResource("CircleShape2D_oe1n8")
+debug_color = Color(0, 0.634871, 0.423958, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.86426, 1.30592)
+shape = SubResource("RectangleShape2D_tvuyk")
+debug_color = Color(0.971809, 0, 0.445404, 0.42)
+
+[node name="RobCooldown" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="RobCooldown" to="." method="_on_rob_cooldown_timeout"]
