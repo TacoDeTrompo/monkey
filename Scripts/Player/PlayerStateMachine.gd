@@ -47,7 +47,7 @@ func get_input(delta):
 		usedGas = true
 		acceleration = acceleration + (PlayerNode.transform.x * braking)
 	
-	if usedGas: PlayerNode.money -= delta # TODO: is this the proper place to do it?, if accelerating remove money
+	if usedGas: PlayerNode.money -= delta * 10 # TODO: is this the proper place to do it?, if accelerating remove money
 	pass
 
 func calculate_steering(delta:float):

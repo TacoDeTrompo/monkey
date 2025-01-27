@@ -10,18 +10,22 @@ const DECELERATION: float = 0.1
 var speed: float   = 1.0
 var progress: float = 1.0
 var finished: bool = false
+var player
+
+signal police
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	name_of_state = "SlidingOut"
 	pathFollow2D = parentSubScene.pathFollow2D
-
+	player = get_tree().get_first_node_in_group("Player")
 
 func Exit():
 	super()
 	finished = false
 	speed = 1.0
 	pathFollow2D.progress_ratio = 0.0
+	player.spawnCops()
 
 
 func accelerate(_delta:float):

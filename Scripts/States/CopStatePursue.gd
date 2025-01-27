@@ -6,9 +6,10 @@ func Enter():
 	pass
 
 func _process(delta):
-	DirectionDif = cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin))
-	ChasePlayer()
+	#DirectionDif = cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin))
+	#ChasePlayer()
 	#print(cop.global_transform.y.dot(cop.global_transform.origin.direction_to(player.global_transform.origin)))
+	pass
 
 func Physics_Update(delta):
 	#cop.velocity.x = move_speed

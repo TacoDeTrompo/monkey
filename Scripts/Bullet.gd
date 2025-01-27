@@ -31,11 +31,14 @@ func _on_bullet_body_entered(body):
 		collide_with_enemy(body)
 
 func collide_with_enemy(body):
-	print("I hit an enemy!")
-	queue_free()
-	pass
+	if body is Police:
+		body.retire()
+		print("I hit an enemy!")
+		queue_free()
+		pass
 
 func collide_with_player(body):
+	body.take_money_damage()
 	print("I hit the player!")
 	queue_free()
 	pass

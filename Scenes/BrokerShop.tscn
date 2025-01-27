@@ -126,9 +126,11 @@ parentSubScene = NodePath("../..")
 
 [node name="SuccessNoises" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_g5dff")
+volume_db = -10.0
 
 [node name="AngryNoises" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_0jtno")
+volume_db = -15.0
 
 [node name="NotEnough" type="Sprite2D" parent="."]
 visible = false
