@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	calculate_audio_pitch(delta)
 	
 	if bananas >= 5:
-		# Win
+		get_tree().change_scene_to_file("res://victory.tscn")
 		pass
 	
 	if money <= 0:

@@ -12,7 +12,8 @@ func banana_bought():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if subscene != null:
-		subscene.banana_bought.connect(self.banana_bought)
+		#subscene.banana_bought.connect(self.banana_bought)
+		pass
 	pass # Replace with function body.
 
 

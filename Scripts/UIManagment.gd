@@ -48,11 +48,11 @@ func _process(delta: float) -> void:
 func handing_mirror(delta):
 	#animation
 	var return_to_standard = true
-	if(player.money > 10000):
+	if(player.money > 15000):
 		return_to_standard = false
 		if(monkey_mirror.animation!="money"):
 			monkey_mirror.set_animation("money")
-	if(numberOfCops > 18):
+	if(numberOfCops > 10):
 		return_to_standard = false
 		if(monkey_mirror.animation!="chase"):
 			monkey_mirror.set_animation("chase")
